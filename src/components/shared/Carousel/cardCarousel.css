@@ -1,0 +1,13 @@
+/* Custom styles for the PrimeReact carousel */
+.p-carousel .p-carousel-prev,
+.p-carousel .p-carousel-next {
+  background-color: white;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
