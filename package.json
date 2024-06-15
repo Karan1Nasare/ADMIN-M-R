@@ -55,7 +55,8 @@
     "branch-name": "enforce-branch-name '(hotfix|bugfix|feature)/.+' --ignore 'staging'",
     "prettier:fix": "prettier --write .",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "build": "npm install --legacy-peer-deps && npm run build",
+    "prebuild": "npm install --legacy-peer-deps",
+    "build": "npm run prebuild && npm run your-existing-build-command",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
