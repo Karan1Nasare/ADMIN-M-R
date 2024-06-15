@@ -1,0 +1,63 @@
+.dialogPaper {
+  width: 800px;
+  height: 400px;
+  background-color: #0b1739;
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+}
+
+.dialogTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 1px solid #526b7a;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.closeButton {
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+.bannerContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.bannerImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.bannerText {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.bannerLogo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.knowMoreButton {
+  background-color: white;
+  color: #0b1739;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
