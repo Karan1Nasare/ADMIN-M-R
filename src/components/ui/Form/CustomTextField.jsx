@@ -1,4 +1,4 @@
-/* eslint-disable react/display-name */
+/*   react/display-name */
 // ** React Import
 import React, { forwardRef } from 'react';
 

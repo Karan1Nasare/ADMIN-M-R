@@ -1,0 +1,3 @@
+node_modules/
+build/
+src/  # or any other directories/files you want to ignore

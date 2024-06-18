@@ -1,7 +1,5 @@
-/* eslint-disable import/no-cycle */
 import React from 'react';
 import Header from '../shared/Header/header';
-// eslint-disable-next-line import/no-cycle
 import SideBar from '../shared/SideBar/sidebar';
 
 const LayoutWrapper = ({ children }) => {

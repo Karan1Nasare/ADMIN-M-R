@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/*   import/no-extraneous-dependencies */
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';

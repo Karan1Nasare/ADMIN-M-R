@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Icon } from '@iconify/react';
 import { Grid } from '@mui/material';
 import TextEditor from './TextEditor/TextEditor';
-import ImageUpload from './Form/ImageUpload'; // eslint-disable-next-line import/no-named-as-default-member
+import ImageUpload from './Form/ImageUpload'; //  -next-line import/no-named-as-default-member
 import RichTextEditor from '../shared/RichTextEditor';
 
 function AddMaterialForm(props) {

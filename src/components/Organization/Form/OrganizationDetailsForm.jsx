@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/*   import/no-extraneous-dependencies */
 
 import React, { useEffect, useState } from 'react';
 import * as zod from 'zod';

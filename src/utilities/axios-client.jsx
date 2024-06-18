@@ -1,5 +1,5 @@
-/* eslint-disable no-case-declarations */
-/* eslint-disable func-names */
+/*   no-case-declarations */
+/*   func-names */
 import React, { useMemo } from 'react';
 import axios from 'axios';
 // import { PROD_HOST_URL, DEV_HOST_URL, TEST_HOST_URL } from '../constants/api';

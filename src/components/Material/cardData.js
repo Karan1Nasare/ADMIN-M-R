@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+/*   import/prefer-default-export */
 import ProfileImage from '../../assets/images/profile-image.png';
 
 export const cardsData = [

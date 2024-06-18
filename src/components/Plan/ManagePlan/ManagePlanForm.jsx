@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/*   import/no-extraneous-dependencies */
 import { useForm } from 'react-hook-form';
 import React, { useState } from 'react';
 import { Grid } from '@mui/material'; // Import individual components from MUI

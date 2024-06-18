@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable import/extensions */
+/*   import/no-extraneous-dependencies */
+/*   import/extensions */
 import { Icon } from '@iconify/react';
 import React, { useState } from 'react';
 import { FaRegEdit } from 'react-icons/fa';

@@ -49,13 +49,12 @@
     "zod": "^3.23.8"
   },
   "scripts": {
+    "build": "react-scripts build",
     "start": "react-scripts start",
     "prepare": "husky install",
     "branch-name": "enforce-branch-name '(hotfix|bugfix|feature)/.+' --ignore 'staging'",
     "prettier:fix": "prettier --write .",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "build": "npm run build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "browserslist": {

@@ -1,4 +1,4 @@
-/* eslint-disable import/no-named-as-default */
+/*   import/no-named-as-default */
 import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';

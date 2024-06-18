@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/*   import/no-extraneous-dependencies */
 import {
   Box,
   Button,

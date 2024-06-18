@@ -1,4 +1,4 @@
-/* eslint-disable import/no-cycle */
+/*   import/no-cycle */
 import React, { useCallback, startTransition } from 'react';
 import { Icon } from '@iconify/react';
 import { Typography } from '@mui/material';

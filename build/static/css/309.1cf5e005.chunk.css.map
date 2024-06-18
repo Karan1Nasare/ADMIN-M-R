@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/309.1cf5e005.chunk.css","mappings":"AAAA,YAEE,aAAc,CAEd,WAAY,CAHZ,iBAAkB,CAElB,WAEF","sources":["components/auth/components/layout.css"],"sourcesContent":[".authButton {\n  position: relative;\n  display: block;\n  width: 200px;\n  height: 50px;\n}\n"],"names":[],"sourceRoot":""}
