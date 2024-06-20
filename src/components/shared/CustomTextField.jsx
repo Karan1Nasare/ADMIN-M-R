@@ -1,4 +1,5 @@
-// ** React Import
+/* eslint-disable react/display-name */
+
 import React, { forwardRef } from 'react';
 
 // ** MUI Imports

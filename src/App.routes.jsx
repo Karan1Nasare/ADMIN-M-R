@@ -1,8 +1,11 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
+/* eslint-disable import/no-cycle */
 
 import React, { lazy, useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useStore } from './store/context-store';
-import AddCourse from './components/Course/Course'; 
+import AddCourse from './components/Course/Course';
 import LanguagePage from './components/Language';
 import Plan from './components/Plan';
 import ManagePlanForm from './components/Plan/ManagePlan/ManagePlanForm';
@@ -11,6 +14,7 @@ import InvoiceTab from './components/Admins/Tabs/InvoiceTab';
 import AdminDetailsPage from './pages/Admins/AdminDetailsPage';
 import AddMaterialPage from './pages/Material/AddMaterialPage';
 import AddOrganization from './pages/Organization/AddOrganization';
+import AuthGuard from './Guards/AuthGuards';
 
 const AdminsPage = lazy(() => import('./pages/Admins/AdminsPage'));
 const AddAdminsPage = lazy(() => import('./pages/Admins/AddAdminsPage'));
@@ -40,7 +44,7 @@ const ChangePassword = lazy(
 
 const LayoutWrapper = lazy(() => import('./components/LayoutWrapper'));
 
-const Dashboard = lazy(() => import('./components/dashboard'));
+const Dashboard = lazy(() => import('./components/dashboard/index'));
 
 const QuestionBank = lazy(() => import('./components/questionBank'));
 const AddQuestions = lazy(
@@ -154,7 +158,7 @@ const AppRoutes = [
     external: false,
     auth: true,
     wrapper: LayoutWrapper,
-    parent: 'dashboard',
+    parent: '/',
   },
 
   {
@@ -496,43 +500,60 @@ const AppRoutes = [
   },
 ];
 
+export const getRouteByName = name =>
+  AppRoutes.find(route => route.name === name);
+
 const AppRouter = () => {
   const [Store, StoreDispatch] = useStore();
   useEffect(() => {
     StoreDispatch({ type: 'Log', data: {} });
-  }, []);
+  }, [StoreDispatch]);
+
   return (
     <BrowserRouter>
       <div className='main-content'>
         <Routes>
           {AppRoutes.map((routeObj, routeIdx) =>
-            routeObj.wrapper ? (
+            routeObj.auth ? (
               <Route
-                key={routeIdx}
-                exact
-                path={`${routeObj?.route}`}
-                element={
-                  <routeObj.wrapper>
-                    <routeObj.component />
-                  </routeObj.wrapper>
-                }
-              />
+                key={`route-${routeIdx}`}
+                path={routeObj.route}
+                element={<AuthGuard />}
+              >
+                {routeObj.wrapper ? (
+                  <Route
+                    path={routeObj.route}
+                    element={
+                      <routeObj.wrapper>
+                        <routeObj.component />
+                      </routeObj.wrapper>
+                    }
+                  />
+                ) : (
+                  <Route
+                    path={routeObj.route}
+                    element={<routeObj.component />}
+                  />
+                )}
+              </Route>
             ) : (
               <Route
-                key={routeIdx}
-                path={`${routeObj.route}`}
-                Component={routeObj.component}
+                key={`route-${routeIdx}`}
+                path={routeObj.route}
+                element={<routeObj.component />}
               />
             ),
           )}
+          <Route
+            path='/*'
+            element={
+              <Navigate to={getRouteByName('dashboard').route} replace />
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>
   );
-};
-
-export const getRouteByName = name => {
-  return AppRoutes.find(route => route.name === name);
 };
 
 export default AppRouter;

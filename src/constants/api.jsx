@@ -1,5 +1,5 @@
 const URLS = {
-  HOST_URL: 'http://localhost:8080',
+  HOST_URL: 'https://superadmin.mandreducation.in',
   SUFFIX_URL: '/api/v1',
   LOGIN: `/login`,
   LOG_OUT: `/logout`,
