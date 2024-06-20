@@ -6,14 +6,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { object, string } from 'yup';
 import { useNavigate } from 'react-router-dom';
 import AuthButtonBg from '../../../../assets/auth/buttonBg.svg';
-import { APIClient } from '../../../../utilities/axios-client';
-import URLS from '../../../../constants/api';
+import axiosInstance, { APIClient } from '../../../../utilities/axios-client';
 import { useStore } from '../../../../store/context-store';
+import useFetcher from '../../../../hooks/useFetcher';
 import { getRouteByName } from '../../../../App.routes';
+import URLS from '../../../../constants/api';
 
 const LoginForm = () => {
   const { API } = APIClient();
   const [Store, StoreDispatch] = useStore();
+  const { fetcher, getExecutorState } = useFetcher();
+
   const [responseErr, setResponseErr] = useState('');
   const navigate = useNavigate();
 
@@ -30,14 +33,21 @@ const LoginForm = () => {
     register,
   } = useForm({ resolver: yupResolver(loginSchema) });
 
+  const loginin = async data => {
+    return axiosInstance.post(URLS.LOGIN, data);
+  };
+
   const onLoginHandler = async data => {
     try {
-      const response = await API('POST', URLS.LOGIN, data, false);
-      if (response.status !== 200) {
-        throw response;
-      }
-      StoreDispatch({ type: 'Login', user: response.data.data });
-      navigate(getRouteByName('dashboard')?.route || '/');
+      fetcher({
+        key: 'login',
+        executer: () => loginin(data),
+        onSuccessRoute: getRouteByName('dashboard')?.route || '/',
+        onSuccess: response => {
+          console.log('🚀 ~ onLoginHandler ~ response:', response);
+          StoreDispatch({ type: 'Login', user: response.data.data });
+        },
+      });
     } catch (err) {
       setResponseErr(err?.response?.data?.message || err.message);
     }
