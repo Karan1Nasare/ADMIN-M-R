@@ -1,5 +1,5 @@
 import React from 'react';
-import videoState  from '../constant/defaultState';
+import videoState from '../constant/defaultState';
 
 const MaterialContentHelper = () => {
   const generateVideoCard = cardSize => {
