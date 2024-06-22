@@ -2,6 +2,7 @@ import { Stack, Tab, Tabs } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { Icon } from '@iconify/react';
+import axios from 'axios';
 
 import { useNavigate, useParams } from 'react-router-dom';
 import TabTitle from '../../components/shared/TabTitle';
@@ -15,17 +16,37 @@ import OrganizationAccountInfo from '../../components/Organization/OrganizationD
 
 const OrganizationViewPage = () => {
   const [Tabvalue, setTabValue] = useState('1');
-  const [organizationDetails, setorganizationDetails] = useState();
+  const [organizationDetails, setorganizationDetails] = useState({});
   const { id } = useParams('id');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const admin = OrganizationData?.find(row => row?.id === id);
-    if (admin) {
-      setorganizationDetails(admin);
-    } else {
-      navigate(PATH_DASHBOARD.Admins.adminList);
+  const fetchOrganization = async () => {
+    try {
+      const token =
+        JSON.parse(window.localStorage.getItem('last_state'))?.user?.token ||
+        '';
+      const data = await axios.get(
+        `https://superadmin.mandreducation.in/api/v1/organizations/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      console.log('data.data.data :: ', data.data.data);
+      setorganizationDetails(data.data.data);
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  useEffect(() => {
+    // const admin = OrganizationData?.find(row => row?.id === id);
+    // if (admin) {
+    fetchOrganization();
+    // } else {
+    // navigate(PATH_DASHBOARD.Admins.adminList);
+    // }
   }, [id]);
 
   const handleChange = (event, newValue) => {

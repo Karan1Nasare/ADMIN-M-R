@@ -2,6 +2,7 @@ import { Tab, Tabs } from '@mui/material';
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import OrganizationDetailsForm from '../../components/Organization/Form/OrganizationDetailsForm';
 import { FormProvider } from '../../hooks/hook-form';
 import Button from '../../components/shared/buttons/Button';
@@ -11,13 +12,41 @@ const AddOrganization = () => {
   const [formcomplete, setformcomplete] = useState({});
   const [profilePicture, setProfilePicture] = useState();
   const [selectedCard, setselectedCard] = useState([]);
+  const token =
+    JSON.parse(window.localStorage.getItem('last_state'))?.user?.token || '';
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
   };
   const onSubmit = async data => {
-    setformcomplete({ [Tabvalue]: true });
-    setTabValue(prv => `${parseInt(prv, 10) + 1}`);
+    console.log('formData :: ', data);
+    const {
+      OrgName,
+      AdminEmail,
+      OrgPhoneNumber,
+      AlternativePhoneNumber,
+      Website,
+    } = data;
+    const formData = new FormData();
+    formData.append('full_name', OrgName);
+    formData.append('email', AdminEmail);
+    formData.append('phone_number', OrgPhoneNumber);
+    formData.append('alternative_phone_number', AlternativePhoneNumber);
+    formData.append('website', Website);
+
+    const resdata = await axios.post(
+      `https://superadmin.mandreducation.in/api/v1/organizations`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    console.log('resdata :: ', resdata);
+    console.log('Tabvalue :: ', Tabvalue);
+    // setformcomplete({ [Tabvalue]: true });
+    // setTabValue(prv => `${parseInt(prv, 10) + 1}`);
   };
   const methods = useForm();
   const {

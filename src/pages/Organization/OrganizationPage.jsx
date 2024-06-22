@@ -1,17 +1,27 @@
 import { Grid, Pagination, PaginationItem, Stack } from '@mui/material';
 import { Icon } from '@iconify/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Button from '../../components/shared/buttons/Button';
 import colors from '../../theme/colors';
 import OrganizationCard from '../../components/Organization/OrganizationCard';
 import PATH_DASHBOARD from '../../routes/path';
 import OrganizationData from './OrganizationData';
 import TextField from '../../components/shared/input/TextField';
+import URLS from '../../constants/api';
 
 const OrganizationPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1);
+  // const initialfilteredItems = OrganizationData.filter(
+  //   key =>
+  //     key.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     key.phone.toLowerCase().includes(searchTerm.toLowerCase()),
+  // );
+  const [filteredItems, setFiltererdItems] = useState([]);
+  const [paginatedItems, setPaginatedItems] = useState([]);
   const itemsPerPage = 6;
 
   const navigate = useNavigate();
@@ -25,19 +35,37 @@ const OrganizationPage = () => {
     setPage(value);
   };
 
-  const filteredItems = OrganizationData.filter(
-    key =>
-      key.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      key.phone.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-
-  const paginatedItems = filteredItems.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage,
-  );
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
 
+  const fetchOrganization = async () => {
+    try {
+      const token =
+        JSON.parse(window.localStorage.getItem('last_state'))?.user?.token ||
+        '';
+      const data = await axios.get(
+        `https://superadmin.mandreducation.in/api/v1/organizations`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setFiltererdItems(data.data.data);
+      setPaginatedItems(
+        data.data.data.data.slice(
+          (page - 1) * itemsPerPage,
+          page * itemsPerPage,
+        ),
+      );
+      console.log('data :: ', data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchOrganization();
+  }, []);
   return (
     <div
       className='w-full'
@@ -92,7 +120,13 @@ const OrganizationPage = () => {
               className='bg-secondary__fill rounded-md h-44 p-7 border border-gray-700'
               key={Organization.id}
             >
-              <OrganizationCard key={index} Organization={Organization} />
+              <OrganizationCard
+                key={index}
+                Organization={Organization}
+                onClick={() =>
+                  navigate(PATH_DASHBOARD.organization.view(Organization.id))
+                }
+              />
             </div>
           ))}
         </div>

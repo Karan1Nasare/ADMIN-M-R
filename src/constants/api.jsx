@@ -54,5 +54,6 @@ const URLS = {
   EDIT_ACADEMIC_YEAR: id => `/academic-years/${id}`,
   UPDATE_ACADEMIC_YEAR: id => `/academic-years/${id}`,
   DELETE_ACADEMIC_YEAR: id => `/academic-years/${id}`,
+  GET_ORGANIZATION: () => `/organizations`,
 };
 export default URLS;

@@ -25,8 +25,9 @@ const OrganizationDetailInfo = ({ organization }) => {
           }}
         >
           <img
-            src={organization?.profileImage}
+            src={organization?.image}
             className='w-full h-full min-h-[150px]'
+            alt='No Image'
           />
         </Stack>
         <Grid container sx={{ marginLeft: '20px' }}>
@@ -37,7 +38,11 @@ const OrganizationDetailInfo = ({ organization }) => {
                 CircleColor={'bright_green'}
                 bageColor={'success'}
                 bageColorLight={'success'}
-                count={200}
+                count={
+                  organization?.active_student_count
+                    ? organization.active_student_count
+                    : 0
+                }
               />
             </Stack>
           </Grid>
@@ -48,7 +53,11 @@ const OrganizationDetailInfo = ({ organization }) => {
                 CircleColor={'bright_green'}
                 bageColor={'tealGreen'}
                 bageColorLight={'tealGreen__opacity'}
-                count={200}
+                count={
+                  organization?.active_staff_count
+                    ? organization.active_staff_count
+                    : 0
+                }
               />
             </Stack>
           </Grid>
@@ -71,7 +80,7 @@ const OrganizationDetailInfo = ({ organization }) => {
               Org Name :
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.name}
+              {organization?.full_name}
             </p>
           </Stack>
           <Stack>
@@ -79,7 +88,9 @@ const OrganizationDetailInfo = ({ organization }) => {
               Org Person Name :
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.name}
+              {organization?.org_person_name
+                ? organization?.org_person_name
+                : '-'}
             </p>
           </Stack>
 
@@ -88,7 +99,7 @@ const OrganizationDetailInfo = ({ organization }) => {
               Alternative Phone Number
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.AlternativePhone || 'N/A'}
+              {organization?.alternative_phone_number || 'N/A'}
             </p>
           </Stack>
           <Stack>
@@ -96,7 +107,7 @@ const OrganizationDetailInfo = ({ organization }) => {
               State
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.state}
+              {organization?.state?.name ? organization?.state?.name : '-'}
             </p>
           </Stack>
           <Stack>
@@ -104,7 +115,7 @@ const OrganizationDetailInfo = ({ organization }) => {
               Address
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.address}
+              {organization?.address ? organization?.address : '-'}
             </p>
           </Stack>
         </Stack>
@@ -114,7 +125,7 @@ const OrganizationDetailInfo = ({ organization }) => {
               Email :
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.email}
+              {organization?.email ? organization?.email : '-'}
             </p>
           </Stack>
           <Stack>
@@ -122,7 +133,7 @@ const OrganizationDetailInfo = ({ organization }) => {
               Phone Number:
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.phone}
+              {organization?.phone_number ? organization?.phone_number : '-'}
             </p>
           </Stack>
           <Stack>
@@ -138,7 +149,7 @@ const OrganizationDetailInfo = ({ organization }) => {
               City
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.city}
+              {organization?.city?.name ? organization?.city?.name : '-'}
             </p>
           </Stack>
           <Stack>
@@ -146,7 +157,7 @@ const OrganizationDetailInfo = ({ organization }) => {
               Pincode
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.pincode}
+              {organization?.pincode ? organization?.pincode : '-'}
             </p>
           </Stack>
         </Stack>
