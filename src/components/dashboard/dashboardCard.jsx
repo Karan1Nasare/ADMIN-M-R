@@ -6,6 +6,7 @@ import totalQuestionBank from '../../assets/icon/totalQuestionBank.svg';
 import totalActiveStudentsIcon from '../../assets/icon/totalActiveStudentsIcon.svg';
 
 const DashboardCards = () => {
+  console.log('dashboard cards');
   const card = [
     {
       icon: totalOrganizationsIcon,

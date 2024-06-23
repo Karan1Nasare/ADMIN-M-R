@@ -1,5 +1,5 @@
 //  -next-line import/prefer-default-export
-export const videoState = {
+export default {
   file: {},
   url: '',
 };

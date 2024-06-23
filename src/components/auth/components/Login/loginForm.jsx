@@ -11,33 +11,44 @@ import URLS from '../../../../constants/api';
 import axiosInstance from '../../../../utilities/axios-client';
 
 const LoginForm = () => {
-  const [, StoreDispatch] = useStore();
+  const { API } = APIClient();
+  const [Store, StoreDispatch] = useStore();
+  const { fetcher, getExecutorState } = useFetcher();
+
+  const [responseErr, setResponseErr] = useState('');
+  const navigate = useNavigate();
+
   const loginSchema = object({
     username: string()
-      .required('username should not be empty')
-      // .username()
+      .required('Username should not be empty')
       .typeError('Please enter a valid username address'),
     password: string().required('Password should not be empty'),
   });
+
   const {
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     register,
   } = useForm({ resolver: yupResolver(loginSchema) });
-  const { fetcher, getExecutorState } = useFetcher();
-  const { isLoading, error } = getExecutorState('login');
+
   const loginin = async data => {
     return axiosInstance.post(URLS.LOGIN, data);
   };
+
   const onLoginHandler = async data => {
-    fetcher({
-      key: 'login',
-      executer: () => loginin(data),
-      onSuccessRoute: getRouteByName('dashboard')?.route || '/',
-      onSuccess: response => {
-        StoreDispatch({ type: 'Login', user: response.data.data });
-      },
-    });
+    try {
+      fetcher({
+        key: 'login',
+        executer: () => loginin(data),
+        onSuccessRoute: getRouteByName('dashboard')?.route || '/',
+        onSuccess: response => {
+          console.log('🚀 ~ onLoginHandler ~ response:', response);
+          StoreDispatch({ type: 'Login', user: response.data.data });
+        },
+      });
+    } catch (err) {
+      setResponseErr(err?.response?.data?.message || err.message);
+    }
   };
 
   return (
@@ -49,8 +60,7 @@ const LoginForm = () => {
         <div className='text-start mt-6 mb-6'>
           <div className='lg:mb-6'>
             <TextField
-              placeholder='UserName (Required)'
-              label=''
+              placeholder='Username (Required)'
               className='underline-border w-full'
               variant='standard'
               {...register('username')}
@@ -58,10 +68,7 @@ const LoginForm = () => {
           </div>
           <div>
             <TextField
-              name='password'
-              id='password'
               placeholder='Password (Required)'
-              label=''
               className='underline-border w-full'
               variant='standard'
               {...register('password')}
