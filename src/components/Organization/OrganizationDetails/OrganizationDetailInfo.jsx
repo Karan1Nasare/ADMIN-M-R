@@ -25,7 +25,7 @@ const OrganizationDetailInfo = ({ organization }) => {
           }}
         >
           <img
-            src={organization?.image}
+            src={organization?.image?.url}
             className='w-full h-full min-h-[150px]'
             alt='No Image'
           />

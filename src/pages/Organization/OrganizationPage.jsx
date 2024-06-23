@@ -10,16 +10,16 @@ import PATH_DASHBOARD from '../../routes/path';
 import OrganizationData from './OrganizationData';
 import TextField from '../../components/shared/input/TextField';
 import URLS from '../../constants/api';
+import useOrganizationManagement from '../../components/Admins/hooks/useorganization';
 
 const OrganizationPage = () => {
+  const {
+    organizations: organizationList,
+    loading,
+    fetchOrganizations,
+  } = useOrganizationManagement();
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1);
-  // const initialfilteredItems = OrganizationData.filter(
-  //   key =>
-  //     key.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     key.phone.toLowerCase().includes(searchTerm.toLowerCase()),
-  // );
   const [filteredItems, setFiltererdItems] = useState([]);
   const [paginatedItems, setPaginatedItems] = useState([]);
   const itemsPerPage = 6;
@@ -28,6 +28,14 @@ const OrganizationPage = () => {
 
   const handleSearchChange = event => {
     setSearchTerm(event.target.value);
+    setFiltererdItems(
+      organizationList.filter(
+        key =>
+          key.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          key.phone_number.toLowerCase().includes(searchTerm.toLowerCase()),
+      ),
+    );
     setPage(1);
   };
 
@@ -37,35 +45,23 @@ const OrganizationPage = () => {
 
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
 
-  const fetchOrganization = async () => {
-    try {
-      const token =
-        JSON.parse(window.localStorage.getItem('last_state'))?.user?.token ||
-        '';
-      const data = await axios.get(
-        `https://superadmin.mandreducation.in/api/v1/organizations`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      setFiltererdItems(data.data.data);
-      setPaginatedItems(
-        data.data.data.data.slice(
-          (page - 1) * itemsPerPage,
-          page * itemsPerPage,
-        ),
-      );
-      console.log('data :: ', data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    fetchOrganizations();
+  }, [fetchOrganizations]);
 
   useEffect(() => {
-    fetchOrganization();
-  }, []);
+    const filtered = organizationList.filter(
+      key =>
+        key.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        key.phone_number.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+    setFiltererdItems(filtered);
+    setPaginatedItems(
+      filtered.slice((page - 1) * itemsPerPage, page * itemsPerPage),
+    );
+  }, [searchTerm, page, organizationList]);
+
   return (
     <div
       className='w-full'
