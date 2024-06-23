@@ -5,7 +5,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import AcademicCard from './academicCard';
 import EditCard from './editCard';
-import axios from '../../utilities/axios-client'; // Adjust the path as needed
+import axiosInstance from '../../utilities/axios-client';
 
 const AcademicYear = () => {
   const [showStartCalendar, setShowStartCalendar] = useState(false);
@@ -19,7 +19,7 @@ const AcademicYear = () => {
 
   const fetchAcademicYears = async () => {
     try {
-      const response = await axios.get('/academic-years');
+      const response = await axiosInstance.get('/academic-years');
       if (response.data.success) {
         setAcademicYears(response.data.data);
       } else {
@@ -43,7 +43,7 @@ const AcademicYear = () => {
 
     try {
       if (editMode) {
-        const response = await axios.put(
+        const response = await axiosInstance.put(
           `/academic-years/${currentYear.id}`,
           newAcademicYear,
         );
@@ -53,7 +53,10 @@ const AcademicYear = () => {
           console.error('Error:', response.data.message);
         }
       } else {
-        const response = await axios.post('/academic-years', newAcademicYear);
+        const response = await axiosInstance.post(
+          '/academic-years',
+          newAcademicYear,
+        );
         if (response.data.success) {
           fetchAcademicYears(); // Refresh the list after adding
         } else {
