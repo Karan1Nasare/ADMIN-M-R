@@ -1,14 +1,24 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
 import { SlCalender } from 'react-icons/sl';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from '../../utilities/axios-client'; // Adjust the path as needed
 
-const EditCard = ({ isEdit }) => {
-  const [startDate1, setStartDate1] = React.useState(null);
-  const [startDate2, setStartDate2] = React.useState(null);
+const EditCard = ({ isEdit, year, onEdit }) => {
+  const [name, setName] = useState('');
+  const [startDate1, setStartDate1] = useState(null);
+  const [startDate2, setStartDate2] = useState(null);
   const datePickerRef1 = React.useRef(null);
   const datePickerRef2 = React.useRef(null);
+
+  useEffect(() => {
+    if (year) {
+      setName(year.name);
+      setStartDate1(new Date(year.start_year));
+      setStartDate2(new Date(year.end_year));
+    }
+  }, [year]);
 
   const handleClick = () => {
     isEdit(false);
@@ -20,6 +30,34 @@ const EditCard = ({ isEdit }) => {
 
   const handleIconClick2 = () => {
     datePickerRef2.current.setOpen(true);
+  };
+
+  const handleUpdateClick = async () => {
+    const updatedYear = {
+      name,
+      start_year: startDate1.toISOString().split('T')[0],
+      end_year: startDate2.toISOString().split('T')[0],
+    };
+
+    console.log('Updated Year Data:', updatedYear); // Debugging statement
+
+    try {
+      const response = await axios.put(
+        `/academic-years/${year.id}`,
+        updatedYear,
+      );
+      console.log('Response:', response.data); // Debugging statement
+      if (response.data.success) {
+        onEdit(); // Refresh the list after updating
+      } else {
+        console.error('Error:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      isEdit(false); // Close the dialog immediately
+      window.location.reload(); // Reload the page
+    }
   };
 
   return (
@@ -41,6 +79,8 @@ const EditCard = ({ isEdit }) => {
           className='bg-secondary__fill items-start text-left h-11 px-3 py-3.5 mt-11 whitespace-nowrap rounded border border-gray-700 border-solid max-md:pr-5 max-md:mt-10 max-md:max-w-full'
           type='text'
           placeholder='Aklavya'
+          value={name}
+          onChange={e => setName(e.target.value)}
         />
         <div className='gap-5 justify-between mt-5 whitespace-nowrap w-full max-w-screen mx-auto grid grid-cols-2'>
           <div className='flex gap-4 justify-between px-3 py-2.5 rounded border border-gray-700 border-solid relative'>
@@ -103,7 +143,7 @@ const EditCard = ({ isEdit }) => {
           </div>
         </div>
         <div
-          onClick={handleClick}
+          onClick={handleUpdateClick}
           className='justify-center self-center px-7 py-3 mt-8 text-base text-center whitespace-nowrap bg-white rounded-lg text-slate-900 max-md:px-5 cursor-pointer'
         >
           Update
@@ -112,4 +152,5 @@ const EditCard = ({ isEdit }) => {
     </div>
   );
 };
+
 export default EditCard;

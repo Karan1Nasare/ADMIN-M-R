@@ -3,6 +3,7 @@
 import React from 'react';
 import Header from '../shared/Header/header';
 import SideBar from '../shared/SideBar/sidebar';
+import LottieBackground from '../LottieBackground';
 
 const LayoutWrapper = ({ children }) => {
   return (
@@ -15,6 +16,7 @@ const LayoutWrapper = ({ children }) => {
           aria-label='Sidebar'
         >
           <div className='px-6.25 py-4 overflow-y-auto'>
+            <LottieBackground />
             <SideBar />
           </div>
         </aside>

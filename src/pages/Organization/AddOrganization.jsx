@@ -1,5 +1,6 @@
+/* eslint-disable import/no-cycle */
 import { Tab, Tabs } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useForm } from 'react-hook-form';
@@ -8,9 +9,11 @@ import OrganizationDetailsForm from '../../components/Organization/Form/Organiza
 import { FormProvider } from '../../hooks/hook-form';
 import Button from '../../components/shared/buttons/Button';
 import useOrganizationManagement from '../../components/Admins/hooks/useorganization';
+import { getRouteByName } from '../../App.routes';
 
 const AddOrganization = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { addOrganization, error, updateOrganization } =
     useOrganizationManagement();
   const [Tabvalue, setTabValue] = useState('1');
@@ -64,6 +67,10 @@ const AddOrganization = () => {
         resdata = await updateOrganization(location.state.editId, formData);
       } else {
         resdata = await addOrganization(formData);
+      }
+      console.log('resdata', resdata, getRouteByName('organization')?.route);
+      if (resdata.status === 200) {
+        navigate(getRouteByName('organization')?.route);
       }
       // setformcomplete({ [Tabvalue]: true });
       // setTabValue(prv => `${parseInt(prv, 10) + 1}`);

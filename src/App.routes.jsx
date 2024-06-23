@@ -440,7 +440,7 @@ const AppRoutes = [
     menu_location: '',
     icon: '',
     external: false,
-    auth: false,
+    auth: true,
     wrapper: LayoutWrapper,
   },
   {
@@ -462,7 +462,7 @@ const AppRoutes = [
     menu_location: '',
     icon: '',
     external: false,
-    auth: false,
+    auth: true,
     wrapper: LayoutWrapper,
   },
   {
@@ -473,7 +473,7 @@ const AppRoutes = [
     menu_location: '',
     icon: '',
     external: false,
-    auth: false,
+    auth: true,
     wrapper: LayoutWrapper,
   },
   // Other Route
@@ -496,7 +496,7 @@ const AppRoutes = [
     menu_location: '',
     icon: '',
     external: false,
-    auth: false,
+    auth: true,
   },
 ];
 

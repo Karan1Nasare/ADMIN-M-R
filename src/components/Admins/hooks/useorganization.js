@@ -58,6 +58,7 @@ const useOrganizationManagement = () => {
   }, []);
 
   // Add a new language
+  // eslint-disable-next-line consistent-return
   const addOrganization = async formData => {
     setLoading(true);
     try {
@@ -70,6 +71,7 @@ const useOrganizationManagement = () => {
         fetchOrganizations();
       }
       setError(null);
+      return response;
     } catch (err) {
       setError(err);
     } finally {
