@@ -3,7 +3,8 @@ import { Button, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import BannerPreviewDialog from '../../banner/bannerPreview';
 
-const CarouselItem = ({ backgroundImage, image }) => {
+const CarouselItem = ({ backgroundImage, image, item }) => {
+  console.log('🚀 ~ CarouselItem ~ item:', item);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
   const openPreviewDialog = () => {
@@ -31,8 +32,7 @@ const CarouselItem = ({ backgroundImage, image }) => {
             alt='University Logo'
           />
           <Typography variant='description' className='text-start'>
-            The Gujarat University is a public state university located at
-            Ahmedabad, Gujarat, India.
+            {item?.title}
           </Typography>
           <Button
             variant='contained'
@@ -58,6 +58,7 @@ const CarouselItem = ({ backgroundImage, image }) => {
       <BannerPreviewDialog
         isOpen={isPreviewOpen}
         onClose={closePreviewDialog}
+        banneritem={item}
       />
     </div>
   );

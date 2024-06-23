@@ -55,5 +55,10 @@ const URLS = {
   UPDATE_ACADEMIC_YEAR: id => `/academic-years/${id}`,
   DELETE_ACADEMIC_YEAR: id => `/academic-years/${id}`,
   GET_ORGANIZATION: () => `/organizations`,
+  GET_BANNER: () => `/banners`,
+  ADD_BANNER: () => `/banners`,
+  EDIT_BANNER: id => `/banners/${id}`,
+  UPDATE_BANNER: id => `/banners/${id}`,
+  DELETE_BANNER: id => `/banners/${id}`,
 };
 export default URLS;

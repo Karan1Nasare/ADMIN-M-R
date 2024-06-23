@@ -1,8 +1,7 @@
 import React from 'react';
-import { TextField, Button } from '@mui/material';
-import { borderColor } from '@mui/system';
+import { RHFTextField } from '../../hooks/hook-form';
 
-const BannerForm = () => {
+const BannerForm = ({ Bannertype }) => {
   return (
     <div className='bg-darkBlue p-6 rounded-lg shadow-lg  mt-6'>
       <div className='grid grid-cols-2 gap-4 mb-4'>
@@ -10,9 +9,11 @@ const BannerForm = () => {
           <label className='text-white text-start mb-2 block'>
             Enter Title
           </label>
-          <TextField
+          <RHFTextField
+            required
+            name='title'
             variant='outlined'
-            placeholder='Enter Staff Full Name'
+            placeholder={`Enter ${Bannertype} Name`}
             fullWidth
             InputProps={{
               style: {
@@ -33,22 +34,30 @@ const BannerForm = () => {
           <label className='text-white text-start mb-2 block'>
             Read More Button Link
           </label>
-          <TextField
+          <RHFTextField
+            required
+            name='button_link'
             variant='outlined'
-            placeholder='Enter Staff Email'
+            placeholder={`Enter ${Bannertype} button link`}
             fullWidth
             sx={{ borderColor: '#869ab8' }}
           />
         </div>
       </div>
       <div className='mb-4'>
-        <label className='text-white text-start mb-2 block'>
-          Description<span className='text-red-500'>*</span>
-        </label>
-        <textarea
-          placeholder='Enter Description...'
-          className='w-full h-32 p-3 rounded-lg bg-darkBlue text-white border border-gray-600 focus:outline-none focus:border-white'
-        ></textarea>
+        <RHFTextField
+          required
+          multiline
+          label='Description'
+          name='description'
+          variant='outlined'
+          placeholder='Enter description'
+          fullWidth
+          sx={{
+            borderColor: '#869ab8',
+            '& .MuiInputBase-root': { p: 0 },
+          }}
+        />
       </div>
     </div>
   );
