@@ -6,10 +6,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { object, string } from 'yup';
 import { useNavigate } from 'react-router-dom';
 import AuthButtonBg from '../../../../assets/auth/buttonBg.svg';
-import axiosInstance, { APIClient } from '../../../../utilities/axios-client';
 import { useStore } from '../../../../store/context-store';
-import useFetcher from '../../../../hooks/useFetcher';
 import { getRouteByName } from '../../../../App.routes';
+import useFetcher from '../../../../hooks/useFetcher';
+import axiosInstance, { APIClient } from '../../../../utilities/axios-client';
 import URLS from '../../../../constants/api';
 
 const LoginForm = () => {

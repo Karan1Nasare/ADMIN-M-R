@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable func-names */
 /* eslint-disable no-underscore-dangle */
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import axios from 'axios';
 // import { PROD_HOST_URL, DEV_HOST_URL, TEST_HOST_URL } from '../constants/api';
 import { useLocation } from 'react-router-dom';
@@ -36,7 +36,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   response => response,
   async error => {
-    const originalRequest = error.config;
+    // const originalRequest = error.config;
     if ([401, 403].includes(error.response.status)) {
       sessionStorage.clear();
       localStorage.clear();
