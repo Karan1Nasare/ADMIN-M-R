@@ -5,7 +5,7 @@ import RichTextEditor from '../../shared/RichTextEditor';
 import { RHFTextField } from '../../../hooks/hook-form';
 
 const AddNotificationForm = ({ selectedFile, setSelectedFile }) => {
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
 
   const handleFileChange = async event => {
     const file = event.target.files[0];
@@ -21,7 +21,7 @@ const AddNotificationForm = ({ selectedFile, setSelectedFile }) => {
   return (
     <div>
       <div className='flex flex-col justify-center p-8 rounded-xl w-full max-w-screen mx-auto border border-gray-700 border-solid bg-secondary__fill max-md:px-5'>
-        <div className=' w-full max-w-screen mx-auto h-88'>
+        <div className='w-full max-w-screen mx-auto h-88'>
           <div className='flex gap-5 max-md:flex-col max-md:gap-0'>
             {/* Left Div */}
             <div className='flex flex-col w-80 max-md:ml-0 border border-gray-700 rounded-lg max-md:w-full h-80'>
@@ -67,7 +67,7 @@ const AddNotificationForm = ({ selectedFile, setSelectedFile }) => {
               </div>
             </div>
             {/* Right Div */}
-            <div className='flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full pr-[1%] h-full'>
+            <div className='flex flex-col ml-5 w-[77%] overflow-hidden max-md:ml-0 max-md:w-full pr-[1%] h-full'>
               <div className='flex flex-col grow max-md:mt-8 max-md:max-w-full h-full'>
                 <div className='text-sm text-left text-white max-md:max-w-full'>
                   Title
@@ -88,8 +88,8 @@ const AddNotificationForm = ({ selectedFile, setSelectedFile }) => {
                     control={control}
                     render={({ field }) => (
                       <RichTextEditor
-                        value={field.value}
-                        onChange={field.onChange}
+                        value={field.value || ''}
+                        setValue={field.onChange}
                       />
                     )}
                   />

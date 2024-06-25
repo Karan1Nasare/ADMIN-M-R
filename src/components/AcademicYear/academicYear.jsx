@@ -102,7 +102,7 @@ const AcademicYear = () => {
           <h1 className='text-white max-md:max-w-full text-left mb-2'>Name</h1>
           <div className='flex '>
             <input
-              className='justify-center h-10 text-white rounded border w-[100%] border-gray-700 bg-secondary__fill border-solid'
+              className='justify-center h-10 p-2.5 text-white rounded border w-[100%] border-gray-700 bg-secondary__fill border-solid'
               type='text'
               placeholder='Enter Name'
               value={name}
@@ -118,7 +118,7 @@ const AcademicYear = () => {
                   <input
                     type='text'
                     placeholder='Select Date'
-                    className='bg-secondary__fill text-stone-300'
+                    className='bg-secondary__fill text-stone-300  p-2.5'
                     value={startDate.toDateString()}
                     readOnly
                   />
@@ -150,7 +150,7 @@ const AcademicYear = () => {
                   <input
                     type='text'
                     placeholder='Select Date'
-                    className='bg-secondary__fill text-stone-300'
+                    className='bg-secondary__fill text-stone-300  p-2.5'
                     value={endDate.toDateString()}
                     readOnly
                   />
@@ -177,7 +177,7 @@ const AcademicYear = () => {
             </div>
           </div>
           <div
-            className='flex h-12 mt-6 w-28 p-4 pt-3 rounded-md bg-white cursor-pointer'
+            className='flex h-12 mt-6 w-28 p-4 rounded-md bg-white cursor-pointer'
             onClick={handleAddClick} // Connect the function here
           >
             <span className='mr-2 ml-2'>

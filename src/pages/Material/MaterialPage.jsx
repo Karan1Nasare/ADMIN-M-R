@@ -52,7 +52,7 @@ const MaterialPage = () => {
 
           <div className='text-sm font-medium text-center  text-gray-500 '>
             <ul className='flex flex-wrap -mb-px'>
-              <li className='me-2'>
+              <li className='me-2 cursor-pointer'>
                 <a
                   type='button'
                   onClick={() => setTab('course')}
@@ -61,7 +61,7 @@ const MaterialPage = () => {
                   Course[STD]
                 </a>
               </li>
-              <li className='me-2'>
+              <li className='me-2 cursor-pointer'>
                 <a
                   onClick={() => setTab('subject')}
                   type='button'
@@ -71,7 +71,7 @@ const MaterialPage = () => {
                   Subject
                 </a>
               </li>
-              <li className='me-2'>
+              <li className='me-2 cursor-pointer'>
                 <a
                   onClick={() => setTab('chapter')}
                   type='button'
@@ -80,7 +80,7 @@ const MaterialPage = () => {
                   Chapter
                 </a>
               </li>
-              <li className='me-2'>
+              <li className='me-2 cursor-pointer'>
                 <a
                   onClick={() => setTab('content')}
                   type='button'
