@@ -1,23 +1,41 @@
 import { Grid, Pagination, PaginationItem, Stack } from '@mui/material';
 import { Icon } from '@iconify/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Button from '../../components/shared/buttons/Button';
 import colors from '../../theme/colors';
 import OrganizationCard from '../../components/Organization/OrganizationCard';
 import PATH_DASHBOARD from '../../routes/path';
 import OrganizationData from './OrganizationData';
 import TextField from '../../components/shared/input/TextField';
+import URLS from '../../constants/api';
+import useOrganizationManagement from '../../components/Admins/hooks/useorganization';
 
 const OrganizationPage = () => {
+  const {
+    organizations: organizationList,
+    loading,
+    fetchOrganizations,
+  } = useOrganizationManagement();
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1);
+  const [filteredItems, setFiltererdItems] = useState([]);
+  const [paginatedItems, setPaginatedItems] = useState([]);
   const itemsPerPage = 6;
 
   const navigate = useNavigate();
 
   const handleSearchChange = event => {
     setSearchTerm(event.target.value);
+    setFiltererdItems(
+      organizationList.filter(
+        key =>
+          key.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          key.phone_number.toLowerCase().includes(searchTerm.toLowerCase()),
+      ),
+    );
     setPage(1);
   };
 
@@ -25,18 +43,24 @@ const OrganizationPage = () => {
     setPage(value);
   };
 
-  const filteredItems = OrganizationData.filter(
-    key =>
-      key.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      key.phone.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-
-  const paginatedItems = filteredItems.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage,
-  );
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+  useEffect(() => {
+    fetchOrganizations();
+  }, [fetchOrganizations]);
+
+  useEffect(() => {
+    const filtered = organizationList.filter(
+      key =>
+        key.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        key.phone_number.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+    setFiltererdItems(filtered);
+    setPaginatedItems(
+      filtered.slice((page - 1) * itemsPerPage, page * itemsPerPage),
+    );
+  }, [searchTerm, page, organizationList]);
 
   return (
     <div
@@ -92,7 +116,13 @@ const OrganizationPage = () => {
               className='bg-secondary__fill rounded-md h-44 p-7 border border-gray-700'
               key={Organization.id}
             >
-              <OrganizationCard key={index} Organization={Organization} />
+              <OrganizationCard
+                key={index}
+                Organization={Organization}
+                onClick={() =>
+                  navigate(PATH_DASHBOARD.organization.view(Organization.id))
+                }
+              />
             </div>
           ))}
         </div>

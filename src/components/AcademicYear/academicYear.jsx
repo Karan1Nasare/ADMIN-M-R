@@ -1,19 +1,92 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LuPlusCircle } from 'react-icons/lu';
 import { SlCalender } from 'react-icons/sl';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import DeleteCard from './deleteCard';
 import AcademicCard from './academicCard';
+import EditCard from './editCard';
+import axios from '../../utilities/axios-client'; // Adjust the path as needed
 
 const AcademicYear = () => {
   const [showStartCalendar, setShowStartCalendar] = useState(false);
   const [showEndCalendar, setShowEndCalendar] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [academicYears, setAcademicYears] = useState([]);
+  const [name, setName] = useState('');
+  const [editMode, setEditMode] = useState(false);
+  const [currentYear, setCurrentYear] = useState(null);
 
-  const handleAddClick = () => {
-    console.log('Added');
+  const fetchAcademicYears = async () => {
+    try {
+      const response = await axios.get('/academic-years');
+      if (response.data.success) {
+        setAcademicYears(response.data.data);
+      } else {
+        console.error('Error:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAcademicYears();
+  }, []);
+
+  const handleAddClick = async () => {
+    const newAcademicYear = {
+      name,
+      start_year: startDate.toISOString().split('T')[0],
+      end_year: endDate.toISOString().split('T')[0],
+    };
+
+    try {
+      if (editMode) {
+        const response = await axios.put(
+          `/academic-years/${currentYear.id}`,
+          newAcademicYear,
+        );
+        if (response.data.success) {
+          fetchAcademicYears(); // Refresh the list after updating
+        } else {
+          console.error('Error:', response.data.message);
+        }
+      } else {
+        const response = await axios.post('/academic-years', newAcademicYear);
+        if (response.data.success) {
+          fetchAcademicYears(); // Refresh the list after adding
+        } else {
+          console.error('Error:', response.data.message);
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    setEditMode(false);
+    setCurrentYear(null);
+    setName('');
+    setStartDate(new Date());
+    setEndDate(new Date());
+  };
+
+  const handleEdit = async updatedYear => {
+    setAcademicYears(prevYears =>
+      prevYears.map(year => (year.id === updatedYear.id ? updatedYear : year)),
+    );
+    setEditMode(false);
+  };
+
+  const handleDelete = async yearId => {
+    setAcademicYears(prevYears => prevYears.filter(year => year.id !== yearId));
+  };
+
+  const startEdit = year => {
+    setEditMode(true);
+    setCurrentYear(year);
+    setName(year.name);
+    setStartDate(new Date(year.start_year));
+    setEndDate(new Date(year.end_year));
   };
 
   return (
@@ -27,6 +100,8 @@ const AcademicYear = () => {
               className='justify-center h-10 text-white rounded border w-[100%] border-gray-700 bg-secondary__fill border-solid'
               type='text'
               placeholder='Enter Name'
+              value={name}
+              onChange={e => setName(e.target.value)}
             />
           </div>
 
@@ -96,18 +171,25 @@ const AcademicYear = () => {
               </div>
             </div>
           </div>
-          <div className='flex h-12 mt-6 w-28 p-4 pt-3 rounded-md bg-white'>
+          <div
+            className='flex h-12 mt-6 w-28 p-4 pt-3 rounded-md bg-white cursor-pointer'
+            onClick={handleAddClick} // Connect the function here
+          >
             <span className='mr-2 ml-2'>
               <LuPlusCircle style={{ fontSize: '1.5em' }} />
             </span>
-            <button onClick={handleAddClick} className='text-base'>
-              Add
-            </button>
+            <button>ADD</button>
           </div>
         </div>
-        <AcademicCard />
+        <AcademicCard
+          academicYears={academicYears}
+          onEdit={startEdit}
+          onDelete={handleDelete}
+        />
       </div>
-      <DeleteCard />
+      {editMode && currentYear && (
+        <EditCard isEdit={setEditMode} year={currentYear} onEdit={handleEdit} />
+      )}
     </div>
   );
 };

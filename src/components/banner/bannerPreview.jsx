@@ -4,9 +4,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import CardBg from '../shared/Carousel/cardbg.png';
 import './BannerPreviewDialog.css';
 
-const BannerPreviewDialog = ({ isOpen, onClose }) => {
+const BannerPreviewDialog = ({ isOpen, onClose, banneritem }) => {
   return (
     <Dialog open={isOpen} onClose={onClose} classes={{ paper: 'dialogPaper' }}>
       <div className='dialogTitle'>
@@ -17,20 +18,15 @@ const BannerPreviewDialog = ({ isOpen, onClose }) => {
       </div>
       <DialogContent>
         <div className='bannerContent'>
-          <img
-            src='https://via.placeholder.com/800x400'
-            alt='Banner Preview'
-            className='bannerImage'
-          />
+          <img src={CardBg} alt='Banner Preview' className='bannerImage' />
           <div className='bannerText'>
             <img
-              src='https://via.placeholder.com/50'
+              src={banneritem?.image?.url}
               alt='Logo'
               className='bannerLogo'
             />
             <p>
-              The Gujarat University is a public state university located at
-              Ahmedabad, Gujarat, India.
+              <b>{banneritem?.title}</b>
             </p>
             <Button className='knowMoreButton'>Know More</Button>
           </div>

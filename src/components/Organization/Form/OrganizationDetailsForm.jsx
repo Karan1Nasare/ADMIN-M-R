@@ -17,7 +17,12 @@ import colors from '../../../theme/colors';
 import { useStore } from '../../../store/context-store';
 import TabTitle from '../../shared/TabTitle';
 
-const OrganizationDetailsForm = ({ setValue }) => {
+const OrganizationDetailsForm = ({
+  setValue,
+  control,
+  statesOptions,
+  cityOptions,
+}) => {
   const [file, setFile] = useState();
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
@@ -31,6 +36,7 @@ const OrganizationDetailsForm = ({ setValue }) => {
     }
   }, [file]);
 
+  console.log('control  :: ooo', control);
   return (
     <>
       <TabTitle title='Org & Personal Details' sx={{ marginTop: '20px' }} />
@@ -138,7 +144,7 @@ const OrganizationDetailsForm = ({ setValue }) => {
               />
             </Grid>
             <Grid item md={6} sm={12}>
-              <RHFTextField
+              {/* <RHFTextField
                 size='small'
                 name='State'
                 type='text'
@@ -146,10 +152,10 @@ const OrganizationDetailsForm = ({ setValue }) => {
                 placeholder='Enter State'
                 fullWidth
                 required
-              />
+              /> */}
             </Grid>
             <Grid item md={6} sm={12}>
-              <RHFTextField
+              {/* <RHFTextField
                 size='small'
                 name='City'
                 type='text'
@@ -157,10 +163,17 @@ const OrganizationDetailsForm = ({ setValue }) => {
                 placeholder='Enter City'
                 fullWidth
                 required
+              /> */}
+              <RHFSelect
+                name={'State'}
+                label={'State'}
+                control={control}
+                options={statesOptions}
+                placeholder='Select...'
               />
             </Grid>
             <Grid item md={6} sm={12}>
-              <RHFTextField
+              {/* <RHFTextField
                 size='small'
                 name='City'
                 type='text'
@@ -168,6 +181,13 @@ const OrganizationDetailsForm = ({ setValue }) => {
                 placeholder='Enter City'
                 fullWidth
                 required
+              /> */}{' '}
+              <RHFSelect
+                name={'City'}
+                label={'city'}
+                control={control}
+                options={cityOptions}
+                placeholder='Select...'
               />
             </Grid>
             <Grid item md={6} sm={12}>

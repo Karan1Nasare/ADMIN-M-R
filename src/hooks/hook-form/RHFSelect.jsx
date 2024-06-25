@@ -38,7 +38,7 @@ export function RHFSelect({
             </InputLabel>
           )}
 
-          <TextField
+          {/* <TextField
             select
             {...field}
             labelId={name}
@@ -77,8 +77,62 @@ export function RHFSelect({
                   </MenuItem>
                 );
               })}
-          </TextField>
+          </TextField> */}
 
+          <Select
+            value={2}
+            {...field}
+            // multiple
+            displayEmpty={!!placeholder}
+            labelId={name}
+            input={<OutlinedInput fullWidth label={label} error={!!error} />}
+            // renderValue={renderValues}
+            MenuProps={{
+              PaperProps: {
+                sx: { px: 1, maxHeight: 280 },
+              },
+            }}
+            {...other}
+          >
+            {placeholder && (
+              <MenuItem
+                disabled
+                value=''
+                sx={{
+                  py: 1,
+                  px: 2,
+                  borderRadius: 0.75,
+                  typography: 'body2',
+                }}
+              >
+                <em>{placeholder}</em>
+              </MenuItem>
+            )}
+
+            {options.map(option => {
+              // const selected = field?.value?.includes(option.value);
+
+              return (
+                <MenuItem
+                  key={option.value}
+                  value={option.value}
+                  sx={{
+                    py: 1,
+                    px: 2,
+                    borderRadius: 0.75,
+                    typography: 'body2',
+                    // ...(selected && {
+                    //   fontWeight: 'fontWeightMedium',
+                    // }),
+
+                    background: 'red',
+                  }}
+                >
+                  {option.label}
+                </MenuItem>
+              );
+            })}
+          </Select>
           {(!!error || helperText) && (
             <FormHelperText error={!!error}>
               {error ? error.message : helperText}
