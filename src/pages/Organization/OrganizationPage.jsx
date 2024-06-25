@@ -31,9 +31,13 @@ const OrganizationPage = () => {
     setFiltererdItems(
       organizationList.filter(
         key =>
-          key.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          key.phone_number.toLowerCase().includes(searchTerm.toLowerCase()),
+          key.full_name
+            ?.toLowerCase()
+            ?.includes(searchTerm?.toLowerCase() || '') ||
+          key.email?.toLowerCase()?.includes(searchTerm?.toLowerCase() || '') ||
+          key.phone_number
+            ?.toLowerCase()
+            ?.includes(searchTerm?.toLowerCase() || ''),
       ),
     );
     setPage(1);
@@ -52,9 +56,13 @@ const OrganizationPage = () => {
   useEffect(() => {
     const filtered = organizationList.filter(
       key =>
-        key.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        key.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        key.phone_number.toLowerCase().includes(searchTerm.toLowerCase()),
+        key.full_name
+          ?.toLowerCase()
+          ?.includes(searchTerm.toLowerCase() || '') ||
+        key.email?.toLowerCase()?.includes(searchTerm.toLowerCase() || '') ||
+        key.phone_number
+          ?.toLowerCase()
+          ?.includes(searchTerm.toLowerCase() || ''),
     );
     setFiltererdItems(filtered);
     setPaginatedItems(

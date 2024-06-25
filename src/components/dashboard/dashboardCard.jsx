@@ -1,66 +1,63 @@
 import React, { useEffect, useState } from 'react';
-import { Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import totalOrganizationsIcon from '../../assets/icon/totalOrganizationsIcon.svg';
 import totalContentsIcon from '../../assets/icon/totalContentsIcon.svg';
 import totalQuestionBank from '../../assets/icon/totalQuestionBank.svg';
 import totalActiveStudentsIcon from '../../assets/icon/totalActiveStudentsIcon.svg';
 import URLS from '../../constants/api';
-import { APIClient } from '../../utilities/axios-client';
+import axiosInstance, { APIClient } from '../../utilities/axios-client';
+import useFetcher from '../../hooks/useFetcher';
 
 const DashboardCards = () => {
-  console.log('dashboard cards');
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const { API } = APIClient();
+  const { fetcher, getExecutorState } = useFetcher();
+  const { isLoading, error } = getExecutorState('dashboard');
   useEffect(() => {
     const fetchData = async () => {
-      // TODO: use useFetcher api hook for handling api calls
-      try {
-        const response = await API('GET', URLS.DASHBOARD(), {}, true);
-        if (response.status !== 200) {
-          throw response;
-        }
-        setData(response.data.data);
-        setLoading(false);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
+      fetcher({
+        key: 'dashboard',
+        executer: () => axiosInstance.get(URLS.DASHBOARD()),
+        onSuccess: res => setData(res?.data?.data),
+      });
     };
     fetchData();
   }, []);
   const card = [
     {
       icon: totalOrganizationsIcon,
-      title: 'Total Students',
+      title: 'Total  Organizations',
       count: data?.organization_count || 0,
       color_from: 'rgba(31, 64, 238, 0.15)',
       color_to: 'rgba(31, 64, 238, 0.035)',
     },
     {
       icon: totalContentsIcon,
-      title: 'Total Exam',
+      title: 'Total Contents',
       count: data?.content_count || 0,
       color_from: 'rgba(248, 194, 9, 0.15)',
       color_to: 'rgba(248, 194, 9, 0.035)',
     },
     {
       icon: totalQuestionBank,
-      title: 'Total Question Bank',
+      title: 'Total Students',
       count: data?.student_count || 0,
       color_from: 'rgba(22, 205, 199, 0.15)',
       color_to: 'rgba(22, 205, 199, 0.035)',
     },
     {
       icon: totalActiveStudentsIcon,
-      title: 'Total Question Bank',
-      count: data?.student__active_count || 0,
+      title: 'Total Active Students',
+      count: data?.student_active_count || 0,
       color_from: 'rgba(0, 245, 134, 0.15)',
       color_to: 'rgba(0, 245, 134, 0.035)',
     },
   ];
+  if (isLoading) {
+    return <CircularProgress color='primary' size={30} />;
+  }
+  if (error) {
+    return <div className='text-red-500'>Something went wrong</div>;
+  }
   return (
     <div className='grid grid-cols-3 gap-8 mx-4'>
       {card &&
