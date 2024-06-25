@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from '../../utilities/axios-client'; // Adjust the path as needed
 
-const EditCard = ({ isEdit, year, onEdit }) => {
+const EditCard = ({ isEdit, year, onEdit, fetchAcademicYears }) => {
   const [name, setName] = useState('');
   const [startDate1, setStartDate1] = useState(null);
   const [startDate2, setStartDate2] = useState(null);
@@ -48,7 +48,8 @@ const EditCard = ({ isEdit, year, onEdit }) => {
       );
       console.log('Response:', response.data); // Debugging statement
       if (response.data.success) {
-        onEdit(); // Refresh the list after updating
+        onEdit();
+        fetchAcademicYears(); // Refresh the list after updating
       } else {
         console.error('Error:', response.data.message);
       }
@@ -56,7 +57,7 @@ const EditCard = ({ isEdit, year, onEdit }) => {
       console.error('Error:', error);
     } finally {
       isEdit(false); // Close the dialog immediately
-      window.location.reload(); // Reload the page
+      // Reload the page
     }
   };
 

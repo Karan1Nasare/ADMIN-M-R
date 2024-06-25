@@ -3,13 +3,6 @@ import Lottie from 'lottie-react';
 import animationBg from '../../assets/lottieBg/BG_Animation.json';
 
 const LottieBackground = () => {
-  useEffect(() => {
-    console.log('LottieBackground mounted');
-    return () => {
-      console.log('LottieBackground unmounted');
-    };
-  }, []);
-
   return (
     <div
       style={{

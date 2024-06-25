@@ -10,11 +10,12 @@ import Button from '../../components/shared/buttons/Button';
 
 import PATH_DASHBOARD from '../../routes/path';
 import OrganizationData from './OrganizationData';
-import ArrowRight from '../../components/icon/ArrowRight';
+import ArrowRight from '../../components/Icon/ArrowRight';
 import OrganizationDetailInfo from '../../components/Organization/OrganizationDetails/OrganizationDetailInfo';
 import OrganizationAccountInfo from '../../components/Organization/OrganizationDetails/OrganizationAccountInfo';
 import DeleteOrgDialog from './DeleteDialog';
 import useOrganizationManagement from '../../components/Admins/hooks/useorganization';
+import axiosInstance from '../../utilities/axios-client';
 
 const OrganizationViewPage = () => {
   const [Tabvalue, setTabValue] = useState('1');
@@ -25,19 +26,7 @@ const OrganizationViewPage = () => {
 
   const fetchOrganization = async () => {
     try {
-      const token =
-        JSON.parse(window.localStorage.getItem('last_state'))?.user?.token ||
-        '';
-      const data = await axios.get(
-        `https://superadmin.mandreducation.in/api/v1/organizations/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      console.log('data.data.data :: ', data.data.data);
+      const data = await axiosInstance.get(`/organizations/${id}`);
       setorganizationDetails(data.data.data);
     } catch (error) {
       console.log(error);

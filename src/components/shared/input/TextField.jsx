@@ -36,7 +36,9 @@ const TextFieldStyled = styled(MUITextField)(({ theme, bgcolor }) => ({
   },
   '& .MuiInputBase-input': {
     color: colors.white,
-    backgroundColor: colors.secondary__fill,
+    textAlign: 'left',
+
+    // backgroundColor: colors.secondary__fill,
 
     '&:not(textarea)': {
       padding: '15.5px 13px',

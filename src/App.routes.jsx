@@ -401,12 +401,12 @@ const AppRoutes = [
   {
     name: 'addNotification',
     slug: 'addNotification',
-    route: '/addNotification',
+    route: '/notification/addNotification',
     component: AddNotification,
     menu_location: '',
     icon: '',
     external: false,
-    auth: false,
+    auth: true,
     wrapper: LayoutWrapper,
   },
   {

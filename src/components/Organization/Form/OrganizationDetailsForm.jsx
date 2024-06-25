@@ -165,8 +165,8 @@ const OrganizationDetailsForm = ({
                 required
               /> */}
               <RHFSelect
+                select
                 name={'State'}
-                label={'State'}
                 control={control}
                 options={statesOptions}
                 placeholder='Select...'
@@ -184,7 +184,7 @@ const OrganizationDetailsForm = ({
               /> */}{' '}
               <RHFSelect
                 name={'City'}
-                label={'city'}
+                // label={'city'}
                 control={control}
                 options={cityOptions}
                 placeholder='Select...'

@@ -75,13 +75,15 @@ const AcademicYear = () => {
 
   const handleEdit = async updatedYear => {
     setAcademicYears(prevYears =>
-      prevYears.map(year => (year.id === updatedYear.id ? updatedYear : year)),
+      prevYears.map(year => (year.id === updatedYear?.id ? updatedYear : year)),
     );
     setEditMode(false);
   };
 
   const handleDelete = async yearId => {
-    setAcademicYears(prevYears => prevYears.filter(year => year.id !== yearId));
+    setAcademicYears(prevYears =>
+      prevYears.filter(year => year?.id !== yearId),
+    );
   };
 
   const startEdit = year => {
@@ -191,7 +193,12 @@ const AcademicYear = () => {
         />
       </div>
       {editMode && currentYear && (
-        <EditCard isEdit={setEditMode} year={currentYear} onEdit={handleEdit} />
+        <EditCard
+          isEdit={setEditMode}
+          year={currentYear}
+          onEdit={handleEdit}
+          fetchAcademicYears={fetchAcademicYears}
+        />
       )}
     </div>
   );
