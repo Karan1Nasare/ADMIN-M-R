@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './styles/styles.css';
 
-const RichTextEditor = ({ setValue, value = '' }) => {
-  const handleChange = (event, editor) => {
-    const data = editor.getData();
-    if (setValue) {
-      setValue(data);
-    }
-    console.debug('Editor Data:', data);
-  };
+const stripHtmlTags = html => {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  return doc.body.textContent || '';
+};
+
+const RichTextEditor = ({ value, onChange, ...styles }) => {
+  const editorRef = useRef(); // Adding a ref to store the editor instance
+
   return (
     <CKEditor
       editor={ClassicEditor}
-      data={value || ''}
-      onChange={handleChange}
+      data={value}
+      onReady={editor => {
+        // Setting the ref when the editor is ready
+        editorRef.current = editor;
+      }}
+      onChange={(event, editor) => {
+        const data = editor.getData();
+        const plainText = stripHtmlTags(data);
+        onChange(data);
+      }}
       config={{
-        // plugins: [Underline, ...ClassicEditor.defaultConfig.plugins],
         toolbar: [
           'bold',
           'italic',
@@ -28,9 +35,8 @@ const RichTextEditor = ({ setValue, value = '' }) => {
           'emoji',
         ],
         toolbarLocation: 'bottom',
-        // You might need to extend or build a custom build to add more plugins if required
       }}
-      style={{ minHeight: '90px' }}
+      style={{ ...styles, minHeight: '90px' }}
     />
   );
 };

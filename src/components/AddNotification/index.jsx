@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import back from '../Icon/back.svg';
+import back from '../icon/back.svg';
 import Header from './components/header';
 import AddNotificationForm from './components/addNotificationForm';
 import useAddNotification from './hooks/useAddNotification';

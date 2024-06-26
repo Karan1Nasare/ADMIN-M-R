@@ -10,7 +10,7 @@ import Button from '../../components/shared/buttons/Button';
 
 import PATH_DASHBOARD from '../../routes/path';
 import OrganizationData from './OrganizationData';
-import ArrowRight from '../../components/Icon/ArrowRight';
+import ArrowRight from '../../components/icon/ArrowRight';
 import OrganizationDetailInfo from '../../components/Organization/OrganizationDetails/OrganizationDetailInfo';
 import OrganizationAccountInfo from '../../components/Organization/OrganizationDetails/OrganizationAccountInfo';
 import DeleteOrgDialog from './DeleteDialog';
