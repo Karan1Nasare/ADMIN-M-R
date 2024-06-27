@@ -281,10 +281,22 @@ export default function TabContainer() {
       case 4:
         data = {
           material_id: materialId,
-          content_type: '3d_model',
+          content_type: 'image',
           type: 'content',
         };
-        threeDModel.forEach((model, index) => {
+        questionBankFile?.forEach((model, index) => {
+          formData.append(`materialcontents[${index}]`, model?.files);
+        });
+
+        break;
+
+      case 5:
+        data = {
+          material_id: materialId,
+          content_type: 'image',
+          type: 'content',
+        };
+        threeDModel?.forEach((model, index) => {
           formData.append(`materialcontents[${index}]`, model?.files);
         });
 
