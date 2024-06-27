@@ -120,11 +120,39 @@ const FileUploaderImage = ({
     <>
       <div
         {...getRootProps()}
-        className={`dropzone w-full h-full min-h-28 p-8 border relative border-dashed  flex justify-center items-center overflow-hidden *:
+        className={`dropzone w-full h-full min-h-28 p-8 relative flex justify-center items-center overflow-hidden *:
 ${isRounded ? 'rounded-[50%]' : 'rounded-lg'}
           `}
         ref={buttonRef}
       >
+        {isRounded ? (
+          <svg className='absolute top-0 left-0 w-full h-full'>
+            <circle
+              cx='50%'
+              cy='50%'
+              r='50%'
+              fill='none'
+              stroke='white'
+              strokeDasharray='9 9'
+              strokeWidth='2'
+            />
+          </svg>
+        ) : (
+          <svg className='absolute top-0 left-0 w-full h-full'>
+            <rect
+              x='0'
+              y='0'
+              width='100%'
+              height='100%'
+              fill='none'
+              stroke='white'
+              strokeDasharray='9 9'
+              strokeWidth='2'
+              rx='6'
+              ry='6'
+            />
+          </svg>
+        )}
         <input {...getInputProps()} />
         <div className='flex  justify-center items-center'>
           <Icon

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useState } from 'react';
 import ContentFilterApply from '../../components/Material/Filters/ContentFilterApply';
 import CourseFilterApply from '../../components/Material/Filters/CourseFilterApply';

@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useFormContext } from 'react-hook-form';
 import { Grid, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import AdminImageSelect from './AdminImageSelect';
 import {
   FormProvider,
@@ -16,6 +17,7 @@ import Button from '../../shared/buttons/Button';
 import colors from '../../../theme/colors';
 import { useStore } from '../../../store/context-store';
 import TabTitle from '../../shared/TabTitle';
+import back from '../../icon/back.svg';
 
 const OrganizationDetailsForm = ({
   setValue,
@@ -27,6 +29,7 @@ const OrganizationDetailsForm = ({
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [Store, StoreDispatch] = useStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (file && file.length > 0) {
@@ -37,13 +40,21 @@ const OrganizationDetailsForm = ({
   }, [file]);
 
   console.log('control  :: ooo', control);
+  const handleBackClick = () => {
+    navigate('/organization');
+  };
   return (
-    <>
-      <TabTitle title='Org & Personal Details' sx={{ marginTop: '20px' }} />
-
+    <div>
+      <div className='flex justify-between'>
+        <TabTitle title='Org & Personal Details' sx={{ marginTop: '20px' }} />
+        <div onClick={handleBackClick} className='flex mr-1 '>
+          <img src={back} alt='' className='text-white mt-2 w-8 h-8 mr-1' />
+          <button className='text-white text-2xl'>Back</button>
+        </div>
+      </div>
       <div className='mt-3'>
         <AdminImageSelect file={file} setFile={setFile} />
-        <div className='text-sm w-full mt-5 font-medium text-center bg-[#0B1739] text-gray-500   p-6 rounded-md flex items-center justify-between'>
+        <div className='text-sm w-full mt-5 font-medium text-center bg-[#0B1739] text-gray-500 border border-gray-700 p-6 rounded-xl flex items-center justify-between'>
           <Grid container spacing={4}>
             <Grid item md={6} sm={12}>
               <RHFTextField
@@ -215,7 +226,7 @@ const OrganizationDetailsForm = ({
           </Grid>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

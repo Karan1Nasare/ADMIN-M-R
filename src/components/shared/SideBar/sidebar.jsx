@@ -18,30 +18,49 @@ const SuperAdminSideBar = () => {
     });
   }, []);
 
+  const isRouteActive = routeName => {
+    const route = getRouteByName(routeName);
+    if (route) {
+      const isActive =
+        location.pathname === route.route ||
+        location.pathname.startsWith(`${route.route}/`);
+      if (route.parent) {
+        const parentRoute = getRouteByName(route.parent);
+        if (parentRoute) {
+          return (
+            isActive || location.pathname.startsWith(`${parentRoute.route}/`)
+          );
+        }
+      }
+      return isActive;
+    }
+    return false;
+  };
+
   const menuList = [
     {
       label: 'Dashboard',
       icon: 'ic:baseline-space-dashboard',
       name: 'dashboard',
-      isActive: ['/', '/dashboard'].includes(location.pathname),
+      isActive: isRouteActive('dashboard'),
     },
     {
       label: 'Organization',
       icon: 'hugeicons:message-multiple-01',
       name: 'organization',
-      isActive: location.pathname === getRouteByName('organization')?.route,
+      isActive: isRouteActive('organization'),
     },
     {
       label: 'Language',
       icon: 'flowbite:user-settings-solid',
       name: 'language',
-      isActive: location.pathname === getRouteByName('language')?.route,
+      isActive: isRouteActive('language'),
     },
     {
       label: 'Academic Year',
       icon: 'mage:bookmark-check-fill',
       name: 'academic-year',
-      isActive: location.pathname === getRouteByName('academic-year')?.route,
+      isActive: isRouteActive('academic-year'),
     },
     // {
     //   label: 'Features',
@@ -55,19 +74,19 @@ const SuperAdminSideBar = () => {
       label: 'Material',
       icon: 'mage:file-2-fill',
       name: 'material',
-      isActive: location.pathname === getRouteByName('material')?.route,
+      isActive: isRouteActive('material'),
     },
     {
       label: 'Notification',
       icon: 'mdi:announcement',
       name: 'notification',
-      isActive: location.pathname === getRouteByName('notification')?.route,
+      isActive: isRouteActive('notification'),
     },
     {
       label: 'Banner For App',
       icon: 'mdi:announcement',
       name: 'banner',
-      isActive: location.pathname === getRouteByName('banner')?.route,
+      isActive: isRouteActive('banner'),
     },
   ];
   return (

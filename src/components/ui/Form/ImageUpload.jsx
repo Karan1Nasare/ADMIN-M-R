@@ -25,14 +25,25 @@ const ImageUpload = ({ image, setFile }) => {
     <>
       <div
         onClick={() => inputRef.current.click()}
-        className='flex flex-col p-4 justify-center items-center w-full md:w-[80%] md:h-[80%]   rounded-3xl border border-gray-700 border-solid aspect-square bg-[#0B1739]  max-md:mt-8'
+        className='relative flex flex-col p-4 justify-center items-center w-full md:w-[100%] md:h-[100%] rounded-3xl border border-gray-700 border-solid aspect-square bg-[#0B1739]  max-md:mt-8'
       >
         {imgSrc ? (
           <div className='w-full h-full'>
             <img src={imgSrc} className='w-full h-full' />
           </div>
         ) : (
-          <div className='flex justify-center items-center px-2 py-2 md:px-10 md:py-10 sm:py-16 sm:px-16 rounded-full border border-white border-dashed '>
+          <div className='flex justify-center items-center w-full h-full'>
+            <svg className='absolute w-44 h-44'>
+              <circle
+                cx='50%'
+                cy='50%'
+                r='50%'
+                fill='none'
+                stroke='white'
+                strokeDasharray='9 9'
+                strokeWidth='2'
+              />
+            </svg>
             <Icon
               icon='material-symbols-light:upload-file-outline'
               className='text-white'

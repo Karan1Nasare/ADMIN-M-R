@@ -28,7 +28,7 @@ const ChangeProfileIamge = ({ setIsChangeProfile }) => {
 
   return (
     <>
-      <div className='bg-darkBlue p-6 mt-5 rounded-lg shadow-lg flex items-center justify-between'>
+      <div className='bg-darkBlue p-6 mt-5 border border-gray-700 rounded-lg shadow-lg flex items-center justify-between'>
         <div className='flex items-center'>
           <div className='flex items-center justify-center'>
             <div className='w-32 h-32 rounded-full overflow-hidden'>
@@ -40,7 +40,7 @@ const ChangeProfileIamge = ({ setIsChangeProfile }) => {
             </div>
           </div>
           <div className='ml-4 text-start'>
-            <p className='text-white text-lg'>Upload Your Banner</p>
+            <p className='text-white text-lg'>Upload Your Profile Picture</p>
             <p className='text-gray-400 text-sm'>
               Allowed JPG, GIF or PNG. Max size of 800K
             </p>

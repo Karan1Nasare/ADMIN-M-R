@@ -158,7 +158,7 @@ const AppRoutes = [
     external: false,
     auth: true,
     wrapper: LayoutWrapper,
-    parent: '/',
+    parent: 'dashboard',
   },
 
   {

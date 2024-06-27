@@ -32,7 +32,7 @@ const ProfileDetailsForm = ({ setValue }) => {
   return (
     <div className='mt-3'>
       <AdminImageSelect file={file} setFile={setFile} />
-      <div className='text-sm w-full mt-5 font-medium text-center bg-[#0B1739] text-gray-500   p-6 rounded-md flex items-center justify-between'>
+      <div className='text-sm w-full mt-5 font-medium border border-gray-700 text-center bg-[#0B1739] text-gray-500 p-6 rounded-xl flex items-center justify-between'>
         <Grid container spacing={4}>
           <Grid item md={6}>
             <RHFTextField
