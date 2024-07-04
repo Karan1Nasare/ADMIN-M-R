@@ -26,6 +26,12 @@ const Banner = ({ bannerTitle }) => {
     setIsAddBanner({ open: true, type: slug });
     // navigate(`/addBanner?type=${slug.toLowerCase()}`);
   };
+  const handleDelete = async bannerId => {
+    setBannerList(prevBanner =>
+      prevBanner.filter(banner => banner?.id !== bannerId),
+    );
+  };
+
   const banner = [
     { buttonTitle: 'Student', bannerTitle: 'Student Banner' },
     { buttonTitle: 'Staff', bannerTitle: 'Staff Banner' },
@@ -83,6 +89,7 @@ const Banner = ({ bannerTitle }) => {
 
                 {/* <Cards1 key={index} /> */}
                 <CardCarousel
+                  onDelete={handleDelete}
                   BannerData={
                     section.buttonTitle === 'Student'
                       ? StudentBanner

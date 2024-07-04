@@ -1,11 +1,41 @@
 import React, { useState } from 'react';
 import { Button, Typography } from '@mui/material';
+import { Icon } from '@iconify/react/dist/iconify';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import axios from '../../../utilities/axios-client';
 import BannerPreviewDialog from '../../banner/bannerPreview';
+import ConfirmDelete from '../../ui/Dialog/ConfirmDelete';
 
-const CarouselItem = ({ backgroundImage, image, item }) => {
-  console.log('🚀 ~ CarouselItem ~ item:', item);
+const CarouselItem = ({ backgroundImage, image, item, onDelete }) => {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
+  };
+  const DeleteBannerById = async id => {
+    try {
+      const response = await axios.delete(`/banners/${id}`);
+      if (response.data.success) {
+        onDelete(id); // Update the parent component's state
+      } else {
+        console.error('Error:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    handleCloseDelete();
+  };
+  const confirmDeleteHandler = () => {
+    if (item.id) {
+      DeleteBannerById(item.id);
+    }
+    setOpenDelete(false);
+  };
+
+  const openDeleteDialog = () => {
+    setOpenDelete(true);
+  };
 
   const openPreviewDialog = () => {
     setIsPreviewOpen(true);
@@ -14,14 +44,13 @@ const CarouselItem = ({ backgroundImage, image, item }) => {
   const closePreviewDialog = () => {
     setIsPreviewOpen(false);
   };
+
   return (
-    <div
-      className={`carousel-item bg-blue-900 rounded-xl overflow-hidden shadow-lg p-8`}
-    >
+    <div className='bg-blue-900 rounded-xl w-[95%] overflow-hidden shadow-lg p-4'>
       <div className='relative rounded-xl group'>
         <img
           className='w-full h-48 object-cover rounded-lg'
-          src={backgroundImage}
+          src={image}
           alt='University'
         />
         <div className='absolute inset-0 bg-black opacity-50 rounded-lg group-hover:opacity-75 transition-opacity'></div>
@@ -31,7 +60,7 @@ const CarouselItem = ({ backgroundImage, image, item }) => {
             src={image}
             alt='University Logo'
           />
-          <Typography variant='description' className='text-start'>
+          <Typography variant='description' className='text-white text-sm mb-2'>
             {item?.title}
           </Typography>
           <Button
@@ -53,6 +82,13 @@ const CarouselItem = ({ backgroundImage, image, item }) => {
             style={{ fontSize: '3rem' }}
             onClick={openPreviewDialog}
           />
+          <Icon
+            icon={'material-symbols:delete'}
+            color='red'
+            width={30}
+            onClick={openDeleteDialog}
+            className='cursor-pointer'
+          />
         </div>
       </div>
       <BannerPreviewDialog
@@ -60,6 +96,17 @@ const CarouselItem = ({ backgroundImage, image, item }) => {
         onClose={closePreviewDialog}
         banneritem={item}
       />
+      {openDelete ? (
+        <ConfirmDelete
+          fullMessage='Are you sure you want to Delete Banner?'
+          title='Delete Banner'
+          handleClose={handleCloseDelete}
+          open={openDelete}
+          deleteLanguage={() => confirmDeleteHandler()}
+        />
+      ) : (
+        ''
+      )}
     </div>
   );
 };
