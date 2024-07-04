@@ -3,7 +3,7 @@ import React from 'react';
 import TabTitle from '../../../shared/TabTitle';
 import ActiveInfoCard from './activeInfoCard';
 
-const ProfileDetailInfo = ({ organization }) => {
+const ProfileDetailInfo = ({ profileData }) => {
   return (
     <>
       <Stack
@@ -23,7 +23,7 @@ const ProfileDetailInfo = ({ organization }) => {
               Org Name :
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.name}
+              {profileData?.name}
             </p>
           </Stack>
           <Stack>
@@ -31,7 +31,7 @@ const ProfileDetailInfo = ({ organization }) => {
               Org Person Name :
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.name}
+              {profileData?.name}
             </p>
           </Stack>
 
@@ -40,7 +40,7 @@ const ProfileDetailInfo = ({ organization }) => {
               Alternative Phone Number
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.AlternativePhone || 'N/A'}
+              {profileData?.AlternativePhone || 'N/A'}
             </p>
           </Stack>
           <Stack>
@@ -48,7 +48,7 @@ const ProfileDetailInfo = ({ organization }) => {
               State
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.state}
+              {profileData?.state}
             </p>
           </Stack>
           <Stack>
@@ -56,7 +56,7 @@ const ProfileDetailInfo = ({ organization }) => {
               Address
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.address}
+              {profileData?.address}
             </p>
           </Stack>
         </Stack>
@@ -66,7 +66,7 @@ const ProfileDetailInfo = ({ organization }) => {
               Email :
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.email}
+              {profileData?.email}
             </p>
           </Stack>
           <Stack>
@@ -74,7 +74,7 @@ const ProfileDetailInfo = ({ organization }) => {
               Phone Number:
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.phone}
+              {profileData?.phone_number}
             </p>
           </Stack>
           <Stack>
@@ -82,7 +82,7 @@ const ProfileDetailInfo = ({ organization }) => {
               Website
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.website || 'N/A'}
+              {profileData?.website || 'N/A'}
             </p>
           </Stack>
           <Stack>
@@ -90,7 +90,7 @@ const ProfileDetailInfo = ({ organization }) => {
               City
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.city}
+              {profileData?.city}
             </p>
           </Stack>
           <Stack>
@@ -98,7 +98,7 @@ const ProfileDetailInfo = ({ organization }) => {
               Pincode
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {organization?.pincode}
+              {profileData?.pincode}
             </p>
           </Stack>
         </Stack>

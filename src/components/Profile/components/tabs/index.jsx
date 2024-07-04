@@ -8,6 +8,7 @@ import { Icon } from '@iconify/react';
 import ProfileDetails from './profileDetails';
 import OrgAccountInfo from './orgAccountInfo';
 import PlanFeatures from './planFeatures';
+import useProfile from '../../hooks/useProfile';
 
 const ProfileTab = () => {
   const [Tabvalue, setTabValue] = useState('1');
@@ -19,25 +20,9 @@ const ProfileTab = () => {
     setTabValue(newValue);
   };
 
-  const onSubmit = async data => {
-    setformcomplete({ [Tabvalue]: true });
-    setTabValue(prv => `${parseInt(prv, 10) + 1}`);
-    console.debug('onSubmit', data);
-  };
-
-  const methods = useForm();
-  const {
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { isSubmitting },
-  } = methods;
-
-  const values = watch();
-
   const ProfilerTabs = activeTab => {
     const TabsList = {
-      1: <ProfileDetails setValue={setValue} />,
+      1: <ProfileDetails />,
       2: <OrgAccountInfo />,
       3: <PlanFeatures />,
     };
@@ -46,7 +31,7 @@ const ProfileTab = () => {
   };
 
   return (
-    <div>
+    <div className=''>
       <Tabs
         value={Tabvalue}
         onChange={handleChange}
@@ -76,13 +61,7 @@ const ProfileTab = () => {
           value={'3'}
         />
       </Tabs>
-      <div>
-        <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            {ProfilerTabs(Tabvalue)}
-          </form>
-        </FormProvider>
-      </div>
+      <div>{ProfilerTabs(Tabvalue)}</div>
     </div>
   );
 };

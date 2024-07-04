@@ -1,26 +1,20 @@
 import { Stack } from '@mui/material';
 import React from 'react';
 import TabTitle from '../../../shared/TabTitle';
-import Button from '../../../shared/buttons/Button';
 import UpdateAccountField from './updateAccountField';
+import useAccountInfo from '../../hooks/useAccountInfo';
 
-const ProfileInfo = ({ organization }) => {
-  // Call Update Api Here
-  const handleUpdateUserName = data => {
-    console.debug('update user name', data);
-  };
-
-  const handleUpdatePassword = data => {
-    console.debug('update password', data);
-  };
-
-  const handleUpdateEmail = data => {
-    console.debug('update email', data);
-  };
-
-  const handleUpdatePhone = data => {
-    console.debug('update mobile', data);
-  };
+const ProfileInfo = ({ profileData }) => {
+  const {
+    username,
+    password,
+    email,
+    phoneNumber,
+    onUpdateUserName,
+    onUpdatePassword,
+    onUpdateEmail,
+    onUpdatePhone,
+  } = useAccountInfo(profileData);
 
   return (
     <>
@@ -31,28 +25,28 @@ const ProfileInfo = ({ organization }) => {
         {/* Update User Name */}
         <UpdateAccountField
           label={'Username'}
-          value={organization?.username}
+          value={username || profileData?.username}
           formFields={[
             {
               label: 'Username',
               name: 'username',
               type: 'text',
               placeholder: 'Enter your username',
-              value: organization?.username,
+              value: username || profileData?.username,
               required: true,
             },
           ]}
-          handleUpdate={handleUpdateUserName}
+          handleUpdate={onUpdateUserName}
         />
         {/* Update Password */}
         <UpdateAccountField
           label={'Password'}
-          value={organization?.password}
+          value={password || profileData?.password}
           formFields={[
             {
               label: 'Current Password*',
               name: 'current_password',
-              type: 'text',
+              type: 'password',
               placeholder: 'Enter Current Password',
               value: '',
               required: true,
@@ -60,54 +54,54 @@ const ProfileInfo = ({ organization }) => {
             {
               label: 'New Password*',
               name: 'new_password',
-              type: 'text',
+              type: 'password',
               placeholder: 'Enter New Password',
               value: '',
               required: true,
             },
             {
               label: 'New Confirm Password*',
-              name: 'new_confirm_password',
-              type: 'text',
-              placeholder: 'New Conform Password',
+              name: 'new_password_confirmation',
+              type: 'password',
+              placeholder: 'New Confirm Password',
               value: '',
               required: true,
             },
           ]}
           isPassword={true}
-          handleUpdate={handleUpdatePassword}
+          handleUpdate={onUpdatePassword}
         />
-        {/* Update Phone Number : */}
+        {/* Update Phone Number */}
         <UpdateAccountField
           label={'Phone Number'}
-          value={organization?.phone}
+          value={phoneNumber || profileData?.phone_number}
           formFields={[
             {
               label: 'Phone Number',
               name: 'phone_number',
               type: 'text',
               placeholder: 'Enter Phone Number',
-              value: organization?.phone,
+              value: phoneNumber || profileData?.phone_number,
               required: true,
             },
           ]}
-          handleUpdate={handleUpdatePhone}
+          handleUpdate={onUpdatePhone}
         />
         {/* Update Email */}
         <UpdateAccountField
           label={'Email'}
-          value={organization?.email}
+          value={email || profileData?.email}
           formFields={[
             {
               label: 'Email',
               name: 'email',
-              type: 'text',
+              type: 'email',
               placeholder: 'Enter your Email',
-              value: organization?.email,
+              value: email || profileData?.email,
               required: true,
             },
           ]}
-          handleUpdate={handleUpdateEmail}
+          handleUpdate={onUpdateEmail}
         />
       </Stack>
     </>

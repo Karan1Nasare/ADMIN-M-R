@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import ProfileImage from '../../../../assets/profile.svg';
 import ProfileDetailInfo from '../tabs/profileDetailInfo';
 
-const ChangeProfileIamge = ({ setIsChangeProfile }) => {
+const ChangeProfileIamge = ({ profileData, setIsChangeProfile }) => {
+  console.log('🚀 ~ ChangeProfileIamge ~ profileData:', profileData);
   const navigate = useNavigate();
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -33,7 +34,7 @@ const ChangeProfileIamge = ({ setIsChangeProfile }) => {
           <div className='flex items-center justify-center'>
             <div className='w-32 h-32 rounded-full overflow-hidden'>
               <img
-                src={ProfileImage}
+                src={profileData?.image?.url || ProfileImage}
                 alt='Circular'
                 className='object-cover w-full h-full'
               />
@@ -66,7 +67,7 @@ const ChangeProfileIamge = ({ setIsChangeProfile }) => {
           </button>
         </div>
       </div>
-      <ProfileDetailInfo />
+      <ProfileDetailInfo profileData={profileData} />
     </>
   );
 };

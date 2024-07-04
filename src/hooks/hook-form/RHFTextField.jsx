@@ -11,9 +11,10 @@ function RHFTextField({
   required = false,
   defaultValue,
   pattern,
+  disabled = false,
   ...other
 }) {
-  const { control, formState } = useFormContext();
+  const { control } = useFormContext();
 
   return (
     <Controller
@@ -43,6 +44,14 @@ function RHFTextField({
           helperText={error ? error?.message : helperText}
           placeholder={placeholder}
           startAdornment={<InputAdornment position='start'>$</InputAdornment>}
+          disabled={disabled}
+          sx={{
+            color: disabled ? 'grey' : 'white',
+            '& .MuiInputBase-input.Mui-disabled': {
+              WebkitTextFillColor: 'grey',
+            },
+            ...sx,
+          }}
           {...other}
         />
       )}

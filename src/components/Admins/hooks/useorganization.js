@@ -14,6 +14,10 @@ const useOrganizationManagement = () => {
   const [error, setError] = useState(null);
   const token =
     JSON.parse(window.localStorage.getItem('last_state'))?.user?.token || '';
+
+  const userId =
+    JSON.parse(window.localStorage.getItem('last_state'))?.user?.user?.id || '';
+
   // Fetch the language list
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -30,7 +34,7 @@ const useOrganizationManagement = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${BASE_URL}?page_size=1000&page=1`,
+        `${BASE_URL}?page_size=1000&page=1?user=${userId}`,
         config,
       );
       console.log(response.data.data.data, 'response.data.data s');

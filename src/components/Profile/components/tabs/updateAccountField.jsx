@@ -27,10 +27,11 @@ const UpdateAccountField = ({
   }, [formFields, setValue]);
 
   const onSubmit = async data => {
+    console.log('🚀 ~ onSubmit ~ data:', data);
     if (handleUpdate) {
-      handleUpdate(data);
+      await handleUpdate(data);
     }
-    // setShowForm(false);
+    setShowForm(false);
   };
 
   return (
@@ -56,7 +57,7 @@ const UpdateAccountField = ({
               {label}
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
-              {!isPassword ? value : `******${value?.slice(-2)}`}
+              {!isPassword ? value : `******${value?.slice(-2) || ''}`}
             </p>
           </Stack>
           <Button
@@ -76,6 +77,7 @@ const UpdateAccountField = ({
                   <Grid item xs={12} key={`${label}${index}`}>
                     <p className='text-[rgba(255,255,255,0.5)] text-left'>
                       {field?.label}
+                      <span className='text-red-600'>*</span>
                     </p>
                     <RHFTextField
                       name={field.name}
