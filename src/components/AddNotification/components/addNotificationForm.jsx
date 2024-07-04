@@ -88,12 +88,12 @@ const AddNotificationForm = ({ selectedFile, setSelectedFile }) => {
                     control={control}
                     render={({ field }) => (
                       <RichTextEditor
-                        value={field.value || ''}
-                        setValue={field.onChange}
+                        value={field.value}
+                        onChange={field.onChange}
                       />
                     )}
                   />
-                </div>
+                </div>{' '}
               </div>
             </div>
           </div>

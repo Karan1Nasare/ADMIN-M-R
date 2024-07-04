@@ -70,12 +70,12 @@ const SuperAdminSideBar = () => {
     //     location.pathname === getRouteByName('features')?.route ||
     //     location.pathname === getRouteByName('addFeature')?.route,
     // },
-    {
-      label: 'Material',
-      icon: 'mage:file-2-fill',
-      name: 'material',
-      isActive: isRouteActive('material'),
-    },
+    // {
+    //   label: 'Material',
+    //   icon: 'mage:file-2-fill',
+    //   name: 'material',
+    //   isActive: isRouteActive('material'),
+    // },
     {
       label: 'Notification',
       icon: 'mdi:announcement',
@@ -91,7 +91,7 @@ const SuperAdminSideBar = () => {
   ];
   return (
     <div className='flex flex-col text-lg text-start text-white '>
-      <div className='ml-8'>
+      <div className='ml-6'>
         <Typography variant='sidebar_menu_h' className='uppercase'>
           Main Menu
         </Typography>
@@ -99,7 +99,7 @@ const SuperAdminSideBar = () => {
       {menuList.map((value, index) => (
         <div
           key={index}
-          className={`h-12 ml-4 p-4 items-start mt-4 w-full rounded-md cursor-pointer  ${
+          className={`h-12 ml-2 p-4 items-start mt-4 w-full rounded-md cursor-pointer  ${
             value.isActive
               ? 'bg-sidebar_active text-primary'
               : 'bg-blue hover:bg-sidebar_active hover:text-primary'

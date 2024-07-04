@@ -12,7 +12,7 @@ import ManagePlanForm from './components/Plan/ManagePlan/ManagePlanForm';
 // import AddSuperAdminNotification from './pages/superAdminNotification/addSuperAdminNotification';
 import InvoiceTab from './components/Admins/Tabs/InvoiceTab';
 import AdminDetailsPage from './pages/Admins/AdminDetailsPage';
-import AddMaterialPage from './pages/Material/AddMaterialPage';
+// import AddMaterialPage from './pages/Material/AddMaterialPage';
 import AddOrganization from './pages/Organization/AddOrganization';
 import AuthGuard from './Guards/AuthGuards';
 
@@ -58,10 +58,10 @@ const AddFeature = lazy(() => import('./pages/AddFeaturePage'));
 const PlanPage = lazy(() => import('./pages/Plan'));
 const ManagePlanPage = lazy(() => import('./pages/ManagePlan'));
 
-const Material = lazy(() => import('./pages/Material/MaterialPage'));
-const AddContent = lazy(
-  () => import('./components/MaterialContent/TabContainer'),
-);
+// const Material = lazy(() => import('./pages/Material/MaterialPage'));
+// const AddContent = lazy(
+//   () => import('./components/MaterialContent/TabContainer'),
+// );
 
 const Notifications = lazy(() => import('./pages/NotificationPage'));
 const AddNotification = lazy(() => import('./pages/AddNotificationPage'));
@@ -303,51 +303,51 @@ const AppRoutes = [
   },
 
   // Material Route
-  {
-    name: 'material',
-    slug: 'material',
-    route: `/material`,
-    component: Material,
-    menu_location: '',
-    icon: '',
-    external: false,
-    auth: true,
-    wrapper: LayoutWrapper,
-  },
-  {
-    name: 'material',
-    slug: 'material',
-    route: `/material/add/:params`,
-    component: AddMaterialPage,
-    menu_location: '',
-    icon: '',
-    external: false,
-    auth: true,
-    wrapper: LayoutWrapper,
-  },
-  // Dashboard Route
-  {
-    name: 'mateiral',
-    slug: 'language',
-    route: '/language',
-    component: LanguagePage,
-    icon: '',
-    external: false,
-    auth: true,
-    wrapper: LayoutWrapper,
-    parent: 'dashboard',
-  },
-  {
-    name: 'AddContent',
-    slug: 'add-content',
-    route: `/material/addContent`,
-    component: AddContent,
-    menu_location: '',
-    icon: '',
-    external: false,
-    auth: true,
-    wrapper: LayoutWrapper,
-  },
+  // {
+  //   name: 'material',
+  //   slug: 'material',
+  //   route: `/material`,
+  //   component: Material,
+  //   menu_location: '',
+  //   icon: '',
+  //   external: false,
+  //   auth: true,
+  //   wrapper: LayoutWrapper,
+  // },
+  // {
+  //   name: 'material',
+  //   slug: 'material',
+  //   route: `/material/add/:params`,
+  //   component: AddMaterialPage,
+  //   menu_location: '',
+  //   icon: '',
+  //   external: false,
+  //   auth: true,
+  //   wrapper: LayoutWrapper,
+  // },
+  // // Dashboard Route
+  // {
+  //   name: 'mateiral',
+  //   slug: 'language',
+  //   route: '/language',
+  //   component: LanguagePage,
+  //   icon: '',
+  //   external: false,
+  //   auth: true,
+  //   wrapper: LayoutWrapper,
+  //   parent: 'dashboard',
+  // },
+  // {
+  //   name: 'AddContent',
+  //   slug: 'add-content',
+  //   route: `/material/addContent`,
+  //   component: AddContent,
+  //   menu_location: '',
+  //   icon: '',
+  //   external: false,
+  //   auth: true,
+  //   wrapper: LayoutWrapper,
+  // },
 
   // Plan Route
   {
