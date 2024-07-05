@@ -20,7 +20,7 @@ const ProfileDetailInfo = ({ profileData }) => {
         <Stack spacing={5} sx={{ flex: 1 }}>
           <Stack>
             <p className='text-[rgba(255,255,255,0.5)] text-sm text-left'>
-              Org Name :
+              Admin Name :
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
               {profileData?.name}
@@ -28,7 +28,7 @@ const ProfileDetailInfo = ({ profileData }) => {
           </Stack>
           <Stack>
             <p className='text-[rgba(255,255,255,0.5)] text-sm text-left'>
-              Org Person Name :
+              Admin Person Name :
             </p>
             <p className='text-[rgba(255,255,255,1)] text-left'>
               {profileData?.name}

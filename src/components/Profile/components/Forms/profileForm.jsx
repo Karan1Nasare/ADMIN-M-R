@@ -66,7 +66,7 @@ const ProfileDetailsForm = ({ profileData, onUpdate, setIsChangeProfile }) => {
             <RHFTextField
               size='small'
               name='name'
-              label='Org Name*'
+              label='Admin Name*'
               placeholder='Enter name'
               fullWidth
               required
@@ -88,7 +88,7 @@ const ProfileDetailsForm = ({ profileData, onUpdate, setIsChangeProfile }) => {
               size='small'
               name='phone_number'
               type='number'
-              label='Org Phone Number*'
+              label='Admin Phone Number*'
               placeholder='Enter Phone Number'
               fullWidth
               required
@@ -98,7 +98,7 @@ const ProfileDetailsForm = ({ profileData, onUpdate, setIsChangeProfile }) => {
             <RHFTextField
               size='small'
               name='username'
-              label='Org Person Name*'
+              label='Admin Person Name*'
               placeholder='Enter Person Name'
               fullWidth
               required
@@ -110,7 +110,7 @@ const ProfileDetailsForm = ({ profileData, onUpdate, setIsChangeProfile }) => {
               size='small'
               name='phone_number'
               type='number'
-              label='Org Person Number*'
+              label='Admin Person Number*'
               placeholder='Enter Person Number'
               fullWidth
               required

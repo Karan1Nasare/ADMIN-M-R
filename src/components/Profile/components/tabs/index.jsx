@@ -49,7 +49,7 @@ const ProfileTab = () => {
         <Tab
           icon={<Icon icon={'flowbite:user-add-solid'} width={25} />}
           iconPosition='start'
-          label='Org Account Info'
+          label='Admin Account Info'
           sx={{ gap: '15px' }}
           value={'2'}
         />

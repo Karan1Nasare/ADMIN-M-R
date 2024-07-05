@@ -23,7 +23,7 @@ const ProfileDetails = () => {
 
   return (
     <>
-      <TabTitle title='Org & Personal Details' sx={{ marginTop: '20px' }} />
+      <TabTitle title='Admin & Personal Details' sx={{ marginTop: '20px' }} />
       <FormProvider {...methods}>
         <form>
           {!isChangeProfile ? (

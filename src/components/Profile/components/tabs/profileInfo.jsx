@@ -19,7 +19,7 @@ const ProfileInfo = ({ profileData }) => {
   return (
     <>
       <Stack sx={{ margin: '20px 0' }}>
-        <TabTitle title={'Org Account Info'} />
+        <TabTitle title={'Admin Account Info'} />
       </Stack>
       <Stack>
         {/* Update User Name */}
