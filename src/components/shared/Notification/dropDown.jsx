@@ -38,7 +38,7 @@ const NotificationDropDown = () => {
     },
   ];
   return (
-    <div className='lg:p-6 rounded-md lg:ml-[62%] lg:-mt-12 ml-[55%] md:ml-[56%] lg:w-[30%] lg:h-[50%] absolute bg-blue z-10 -mt-10 text-white m-2 p-2 w-[35%] h-[58%]'>
+    <div className='lg:p-6 rounded-md border border-gray-700 lg:ml-[60%] h-auto lg:-mt-12 ml-[55%] md:ml-[56%] lg:w-[30%] absolute bg-secondary__fill z-10 -mt-10 text-white m-2 p-2 w-[35%]'>
       <div className='flex justify-between'>
         <h1 className='pl-4'>Notification</h1>
         <div className='w-24 bg-yellow-500 rounded-full '>
@@ -58,8 +58,10 @@ const NotificationDropDown = () => {
         </div>
       ))}
       <hr className='mt-4' />
-      <div className='lg:ml-[32%] bg-yellow-500 h-8 w-56 mt-5 lg:mt-8 rounded-md ml-[26%]'>
-        <h6 className='text-sm pt-1'>See All Notification</h6>
+      <div className='flex justify-center'>
+        <div className='bg-yellow-500 h-8 w-56 mt-5 lg:mt-8 rounded-md'>
+          <h6 className='text-sm pt-1'>See All Notification</h6>
+        </div>
       </div>
     </div>
   );
