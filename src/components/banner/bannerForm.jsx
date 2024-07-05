@@ -3,7 +3,7 @@ import { RHFTextField } from '../../hooks/hook-form';
 
 const BannerForm = ({ Bannertype }) => {
   return (
-    <div className='bg-darkBlue p-6 rounded-lg shadow-lg  mt-6'>
+    <div className='bg-darkBlue p-6 border border-gray-700 rounded-lg shadow-lg  mt-6'>
       <div className='grid grid-cols-2 gap-4 mb-4'>
         <div>
           <label className='text-white text-start mb-2 block'>
@@ -55,7 +55,7 @@ const BannerForm = ({ Bannertype }) => {
           fullWidth
           sx={{
             borderColor: '#869ab8',
-            '& .MuiInputBase-root': { p: 0 },
+            '& .MuiInputBase-root': { p: 2 },
           }}
         />
       </div>

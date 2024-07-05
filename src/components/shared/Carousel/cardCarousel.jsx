@@ -31,7 +31,7 @@ const CardCarousel = ({ BannerData }) => {
   const itemTemplate = item => {
     return (
       <div className='w-full px-2'>
-        <div className='bg-darkBlue rounded-xl flex items-center justify-center h-60'>
+        <div className='bg-darkBlue border border-gray-700 rounded-xl flex items-center justify-center h-60'>
           <CarouselItem
             backgroundImage={CardBg}
             image={item?.image?.url}
