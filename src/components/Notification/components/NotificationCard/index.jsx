@@ -97,7 +97,7 @@ function NotificationCard({
           title='Delete Notification'
           handleClose={handleCloseDelete}
           open={openDelete}
-          deleteHandler={() => confirmDeleteHandler(selectedData?.id)}
+          deleteLanguage={() => confirmDeleteHandler(selectedData?.id)}
         />
       )}
 

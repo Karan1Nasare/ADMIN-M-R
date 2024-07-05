@@ -23,7 +23,7 @@ const useAddNotification = () => {
   };
 
   const getAllAdmins = () => {
-    return axiosInstance.get(URLS.GET_ADMINS());
+    return axiosInstance.get(URLS.GET_ORGANIZATIONS());
   };
 
   const openAdminDialog = () => {
